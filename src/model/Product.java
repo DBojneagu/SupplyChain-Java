@@ -2,15 +2,17 @@ package model;
 
 public class Product {
     private long id;
+    private String name;
     private int price;
     private int stock;
-    private String name;
 
-    public Product(long id, int price, int stock, String name) {
+
+    public Product(long id,String name, int price, int stock) {
         this.id = id;
+        this.name = name;
         this.price = price;
         this.stock = stock;
-        this.name = name;
+
     }
 
     public long getId() {
@@ -47,6 +49,6 @@ public class Product {
 
     @Override
     public String toString () {
-        return id + name + stock + price ;
+        return " Id: "+ id +  " |  Name: " + name + " | Stock:  "  + stock + " | Price: "  + price  ;
     }
 }

@@ -5,8 +5,8 @@ public abstract class Lighting extends Product {
     private int power;
     private String type;
 
-    public Lighting(long id, int price, int stock, String name, int power, String type) {
-        super(id, price, stock, name);
+    public Lighting(long id, String name, int stock, int price, int power, String type) {
+        super(id, name, stock, price);
         this.power = power;
         this.type = type;
     }
