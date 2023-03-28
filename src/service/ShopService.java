@@ -16,27 +16,32 @@ import java.util.List;
 
 public class ShopService {
     public void addProduct(Shop shop, Product product) {
-        int nextAvailableIndex = getNumberOfProducts(shop);
-        shop.getProducts()[nextAvailableIndex] = product;
+        shop.getProducts().add(product);
         String message = "Product " + product.getName() + " was added to the shop";
         System.out.println(message);
     }
+    public void removeProduct(Shop shop, long id ){
+        shop.getProducts().removeIf(obj -> obj.getId() == id );
+        System.out.println("Produsul a fost sters");
+    }
 
-    public void addFurniture(Shop shop, Product furniture) {
-        int nextAvailableIndex = getNumberOfFurnitures(shop);
-        shop.getFurnitures()[nextAvailableIndex] = furniture;
+    public void addFurniture(Shop shop, Furniture furniture) {
+
+        shop.getFurnitures().add(furniture);
+
+    }
+    public void removeFurniture(Shop shop, long id ){
+        shop.getFurnitures().removeIf(obj -> obj.getId() == id );
+        System.out.println("Furniture a fost sters");
+    }
+
+    public void addLighting(Shop shop, Lighting  lighting) {
+        shop.getProducts().add(lighting);
 
     }
 
-    public void addLighting(Shop shop, Product  lighting) {
-        int nextAvailableIndex = getNumberOfLightings(shop);
-        shop.getLightings()[nextAvailableIndex] = lighting;
-
-    }
-
-    public void addSmartHome(Shop shop, Product  smartHome) {
-        int nextAvailableIndex = getNumberOfSmartHomes(shop);
-        shop.getSmartHomes()[nextAvailableIndex] = smartHome;
+    public void addSmartHome(Shop shop, SmartHome  smartHome) {
+        shop.getProducts().add(smartHome);
 
     }
 

@@ -43,7 +43,7 @@ public class Main {
                         System.out.println("Width:");
                           double width = scanner.nextDouble();
                            scanner.nextLine();
-                          Product added_furniture = productService.buildFurniture(name,price,stock,material,height,width);
+                          Furniture added_furniture = productService.buildFurniture(name,price,stock,material,height,width);
                           shopService.addProduct(shop,added_furniture);
                           shopService.addFurniture(shop,added_furniture);
                           break;
@@ -59,7 +59,7 @@ public class Main {
                         System.out.println("type:");
                         scanner.nextLine();
                         String type  = scanner.nextLine();
-                        Product added_lighting = productService.buildLighting(name,price,stock,power,type);
+                        Lighting added_lighting = productService.buildLighting(name,price,stock,power,type);
                         shopService.addProduct(shop,added_lighting);
                         shopService.addLighting(shop,added_lighting);
                         break;
@@ -76,7 +76,7 @@ public class Main {
                         String category = scanner.nextLine();
                         System.out.println("appname : ");
                         String appname = scanner.nextLine();
-                        Product added_smarthome = productService.buildSmartHome(name,price,stock,category,appname);
+                        SmartHome added_smarthome = productService.buildSmartHome(name,price,stock,category,appname);
                         shopService.addProduct(shop,added_smarthome);
                         shopService.addSmartHome(shop,added_smarthome);
                         break;
@@ -105,32 +105,11 @@ public class Main {
                 }
             }
             if (input.equals("3")) {
-                System.out.println("What product do you exactly want remove?");
-                System.out.println("1.  Furniture Product");
-                System.out.println("2.  Lighting Product");
-                System.out.println("3.  Smarthome Product");
-                String input_afis = scanner.nextLine();
-                switch(input_afis) {
-                    case "1" :
-                        Product[] furnitures = shop.getFurnitures();
-                        if (furnitures == null) {
-                            System.out.println("There are no furniture products to remove.");
-                        } else {
-                            shopService.printProductsDetails(shop);
-                            System.out.println("Specify the id of the product that you want to remove");
-                            int id = scanner.nextInt();
-                        }
-                    case "2" :
-                        shopService.printFurnituresDetails(shop);
-                        break;
-                    case "3" :
-                        shopService.printLightingsDetails(shop);
-                        break;
-                    case "4" :
-                        shopService.printSmartHomesDetails(shop);
-                        break;
-                }
-
+                System.out.print("Enter the ID of the furniture you want to remove: ");
+                long furnitureId = scanner.nextLong();
+                scanner.nextLine(); // consume the newline character
+                shopService.removeFurniture(shop,furnitureId);
+                shopService.removeProduct(shop,furnitureId);
             }
 
         }while(!input.equals("4"));
