@@ -1,6 +1,6 @@
 package model;
 
-public abstract class Lighting extends Product {
+public class Lighting extends Product {
 
     private int power;
     private String type;
@@ -25,5 +25,10 @@ public abstract class Lighting extends Product {
 
     public void setPower(int power) {
         this.power = power;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + " | Power: " + power + " | Type: " + type ;
     }
 }

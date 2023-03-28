@@ -7,7 +7,7 @@ public  class SmartHome extends Product {
     public SmartHome(long id, String name, int stock, int price, String category, String appName) {
         super(id, name, stock, price);
         this.category = category;
-        AppName = appName;
+        this.AppName = appName;
     }
 
     public String getCategory() {
@@ -24,5 +24,10 @@ public  class SmartHome extends Product {
 
     public void setAppName(String appName) {
         AppName = appName;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + " | Category : " + category + " | AppName: " + AppName ;
     }
 }

@@ -11,4 +11,16 @@ public class ProductService {
                 name, price, stock, material, height,width);
     }
 
+    public Product buildLighting(String name,int price, int stock, int power,String type ) {
+
+        return new Lighting(new Random().nextInt(100),
+                name, price, stock, power, type);
+    }
+
+    public Product buildSmartHome(String name,int price, int stock,String category, String appname ) {
+
+        return new SmartHome(new Random().nextInt(100),
+                name, price, stock, category, appname);
+    }
+
 }
