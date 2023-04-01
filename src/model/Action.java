@@ -4,6 +4,15 @@ public class Action {
 
     private long id;
     private String name;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     private double price;
 
     public Action(long id,String name,double price)
@@ -30,8 +39,8 @@ public class Action {
     }
 
     @Override
-    public String toString() {
-        return name + " " + price ;
+    public String toString () {
+        return " Id: "+ id +  " |  Name: " + name +  " | Price: "  + price  ;
     }
 
 }

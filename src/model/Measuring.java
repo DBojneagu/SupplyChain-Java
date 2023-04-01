@@ -17,6 +17,6 @@ public  class Measuring extends Action{
     }
     @Override
     public String toString(){
-        return super.toString() + " " + category;
+        return super.toString() + " |  Category : " + category;
     }
 }

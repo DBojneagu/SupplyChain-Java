@@ -29,6 +29,6 @@ public  class Assembly extends Action {
 
     @Override
     public String toString(){
-            return super.toString() + " " +  number_of_products + " " +  number_of_products;
+            return super.toString() + " | Number of products :  " +  number_of_products + " | Number of Employees : " +  number_of_employees;
     }
 }

@@ -25,4 +25,9 @@ public  class Delivery extends Action {
     public void setVehicle_type(String vehicle_type) {
         this.vehicle_type = vehicle_type;
     }
+
+    @Override
+    public String toString() {
+        return super.toString() + " | Vehicle Brand : " + vehicle_brand + " | Vehicle Type : " + vehicle_type ;
+    }
 }

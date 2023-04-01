@@ -16,9 +16,32 @@ public class ShopService {
         System.out.println("Produsul a fost sters");
     }
 
-    public void addFurniture(Shop shop, Furniture furniture) {
+    public void addAction(Shop shop, Action action) {
+        shop.getActions().add(action);
+        String message = "Action " + action.getName() + " was added to the shop";
+        System.out.println(message);
+    }
 
-        shop.getFurnitures().add(furniture);
+    public void removeAction(Shop shop, long id) {
+        shop.getActions().removeIf(obj -> obj.getId() == id);
+        System.out.println("Action deleted");
+    }
+
+    public void addDelivery(Shop shop, Delivery delivery) {
+
+        shop.getDeliveries().add(delivery);
+
+    }
+
+    public void addAssembly(Shop shop, Assembly assembly) {
+
+        shop.getAssemblies().add(assembly);
+
+    }
+
+    public void addMeasuring(Shop shop, Measuring measuring) {
+
+        shop.getMeasurings().add(measuring);
 
     }
 
@@ -27,17 +50,45 @@ public class ShopService {
         System.out.println("Furniture a fost sters");
     }
 
+    public void removeDelivery(Shop shop, long id) {
+        shop.getDeliveries().removeIf(obj -> obj.getId() == id);
+        System.out.println("Delivery deleted");
+    }
+    public void removeAssembly(Shop shop, long id) {
+        shop.getAssemblies().removeIf(obj -> obj.getId() == id);
+        System.out.println("Assembly deleted");
+    }
+    public void removeMeasuring(Shop shop, long id) {
+        shop.getMeasurings().removeIf(obj -> obj.getId() == id);
+        System.out.println("Measuring deleted");
+    }
+
     public void addLighting(Shop shop, Lighting lighting) {
-        shop.getProducts().add(lighting);
+        shop.getLightings().add(lighting);
 
     }
 
     public void addSmartHome(Shop shop, SmartHome smartHome) {
-        shop.getProducts().add(smartHome);
+        shop.getSmartHomes().add(smartHome);
 
     }
 
-    private int getNumberOfProducts(Shop shop) {
+    public void addFurniture(Shop shop, Furniture furniture) {
+        shop.getFurnitures().add(furniture);
+
+    }
+
+    public void removeLighting(Shop shop, long id) {
+        shop.getLightings().removeIf(obj -> obj.getId() == id);
+        System.out.println("Lighting deleted");
+    }
+
+    public void removeSmartHome(Shop shop, long id) {
+        shop.getSmartHomes().removeIf(obj -> obj.getId() == id);
+        System.out.println("SmartHome deleted");
+    }
+
+    public int getNumberOfProducts(Shop shop) {
         int numberOfProducts = 0;
         for (Product p : shop.getProducts()) {
             if (p != null) {
@@ -47,7 +98,17 @@ public class ShopService {
         return numberOfProducts;
     }
 
-    private int getNumberOfFurnitures(Shop shop) {
+    public int getNumberOfActions(Shop shop) {
+        int numberOfActions = 0;
+        for (Action a : shop.getActions()) {
+            if (a != null) {
+                numberOfActions++;
+            }
+        }
+        return numberOfActions;
+    }
+
+    public int getNumberOfFurnitures(Shop shop) {
         int numberOfFurnitures = 0;
         for (Product f : shop.getFurnitures()) {
             if (f != null) {
@@ -57,7 +118,7 @@ public class ShopService {
         return numberOfFurnitures;
     }
 
-    private int getNumberOfSmartHomes(Shop shop) {
+    public int getNumberOfSmartHomes(Shop shop) {
         int numberOfSmartHomes = 0;
         for (Product sm : shop.getSmartHomes()) {
             if (sm != null) {
@@ -67,7 +128,37 @@ public class ShopService {
         return numberOfSmartHomes;
     }
 
-    private int getNumberOfLightings(Shop shop) {
+    public int getNumberOfDeliveries(Shop shop) {
+        int numberOfDeliveries = 0;
+        for (Delivery d : shop.getDeliveries()) {
+            if (d != null) {
+                numberOfDeliveries++;
+            }
+        }
+        return numberOfDeliveries;
+    }
+
+    public int getNumberOfMeasurings(Shop shop) {
+        int numberOfMeasurings = 0;
+        for (Measuring m : shop.getMeasurings()) {
+            if (m != null) {
+                numberOfMeasurings++;
+            }
+        }
+        return numberOfMeasurings;
+    }
+
+    public int getNumberOfAssembly(Shop shop) {
+        int numberOfAssemblys = 0;
+        for ( Assembly a : shop.getAssemblies()) {
+            if (a != null) {
+                numberOfAssemblys++;
+            }
+        }
+        return numberOfAssemblys;
+    }
+
+    public int getNumberOfLightings(Shop shop) {
         int numberOfLightings = 0;
         for (Product l : shop.getLightings()) {
             if (l != null) {
@@ -113,6 +204,50 @@ public class ShopService {
             i++;
             if (p != null) {
                 System.out.println(i + "->" + p);
+            }
+        }
+
+    }
+
+    public void printActionsDetails(Shop shop) {
+        int i = 0;
+        for (Action a : shop.getActions()) {
+            i++;
+            if (a != null) {
+                System.out.println(i + "->" + a);
+            }
+        }
+
+    }
+
+    public void printDeliveryDetails(Shop shop) {
+        int i = 0;
+        for (Delivery d : shop.getDeliveries()) {
+            i++;
+            if (d != null) {
+                System.out.println(i + "->" + d);
+            }
+        }
+
+    }
+
+    public void printMeasuringDetails(Shop shop) {
+        int i = 0;
+        for (Measuring m : shop.getMeasurings()) {
+            i++;
+            if (m != null) {
+                System.out.println(i + "->" + m);
+            }
+        }
+
+    }
+
+    public void printAssemblyDetails(Shop shop) {
+        int i = 0;
+        for (Assembly a : shop.getAssemblies()) {
+            i++;
+            if (a != null) {
+                System.out.println(i + "->" + a);
             }
         }
 
