@@ -10,20 +10,14 @@ import model.Assembly;
 import model.Measuring;
 import model.Shop;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class ShopService {
-    private static Shop single_instance = null;
-    private ProductService productService = new ProductService();
-    public static synchronized Shop getInstance(){
-        if(single_instance == null){
-            single_instance = new Shop();
-        }
-        return single_instance;
-    }
+
+    ProductService productService = new ProductService();
+
+
+
     public void addProduct(Shop shop, Product product) {
         shop.getProducts().add(product);
         String message = "Product " + product.getName() + " was added to the shop";
@@ -158,10 +152,12 @@ public class ShopService {
             }
         }
     }
-    public void init() {
-        addFurniture(getInstance(),productService.buildFurniture("Scaun",100,200,"matase",200,300));
-        System.out.println(getInstance());
-        printFurnituresDetails(getInstance());
+    public void init(Shop shop) {
+        addFurniture(shop,productService.buildFurniture("Scaun",100,200,"matase",200,300));
+        System.out.println(shop);
+        printFurnituresDetails(shop);
     }
+
+
 }
 // nu stiu sigur daca l facem
