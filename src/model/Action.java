@@ -1,11 +1,12 @@
 package model;
 
-public class Service {
+public class Action {
+
     private long id;
     private String name;
     private double price;
 
-    public Service(long id,String name,double price)
+    public Action(long id,String name,double price)
     {
         this.id = id;
         this.name=name;
@@ -34,3 +35,5 @@ public class Service {
     }
 
 }
+
+

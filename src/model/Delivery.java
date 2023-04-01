@@ -1,6 +1,6 @@
 package model;
 
-public abstract class Delivery extends Service {
+public  class Delivery extends Action {
     private String vehicle_brand;
     private String vehicle_type;
 

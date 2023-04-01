@@ -1,22 +1,9 @@
 package service;
 
-import model.Product;
-import model.SmartHome;
-import model.Furniture;
-import model.Lighting;
-import model.Service;
-import model.Delivery;
-import model.Assembly;
-import model.Measuring;
-import model.Shop;
-
+import model.*;
 import java.util.*;
 
 public class ShopService {
-
-    ProductService productService = new ProductService();
-
-
 
     public void addProduct(Shop shop, Product product) {
         shop.getProducts().add(product);
@@ -151,11 +138,6 @@ public class ShopService {
                 System.out.println(i + "->" + p);
             }
         }
-    }
-    public void init(Shop shop) {
-        addFurniture(shop,productService.buildFurniture("Scaun",100,200,"matase",200,300));
-        System.out.println(shop);
-        printFurnituresDetails(shop);
     }
 
 

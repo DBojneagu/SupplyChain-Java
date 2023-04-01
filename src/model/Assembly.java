@@ -1,6 +1,6 @@
 package model;
 
-public abstract class Assembly extends Service {
+public  class Assembly extends Action {
         protected int  number_of_products;
         private int number_of_employees;
         // Poate facem aici o lista de angajati inloc de numar ca sa folosim Array

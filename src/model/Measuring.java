@@ -1,6 +1,6 @@
 package model;
 
-public abstract class Measuring extends Service{
+public  class Measuring extends Action{
     private String category;
 
     public Measuring(long id, String name, double price, String category) {
