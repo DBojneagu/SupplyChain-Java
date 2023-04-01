@@ -9,9 +9,10 @@ public class Main {
     {
         String input;
         Shop shop = new Shop();
+        System.out.println(shop);
         ShopService shopService = new ShopService();
         ProductService productService = new ProductService();
-
+        shopService.init();
         Scanner scanner = new Scanner(System.in);
         do
         {
@@ -19,7 +20,9 @@ public class Main {
             System.out.println("1. Add a new Product Information");
             System.out.println("2. Get the description of  products  ");
             System.out.println("3. Delete a product  ");
-            System.out.println("4. Exit ");
+            System.out.println("4. Search products by price range ");
+            System.out.println("5. Sort the products by price ");
+            System.out.println("6. Exit ");
             input =(scanner.nextLine());
             if (input.equals("1")){
                 System.out.println("Please specify the details for creating a new product: What category do you want it to be?");
@@ -111,7 +114,24 @@ public class Main {
                 shopService.removeFurniture(shop,furnitureId);
                 shopService.removeProduct(shop,furnitureId);
             }
+            if (input.equals("4")){ // show products by price range
+                System.out.print("Enter minumum: ");
+                int lower = scanner.nextInt();
+                scanner.nextLine();
 
-        }while(!input.equals("4"));
+                System.out.print("Enter maximum: ");
+                int higher = scanner.nextInt();
+                scanner.nextLine();
+
+                shopService.printProductsDetailsByRange(shop,lower,higher);
+
+            }
+
+            if (input.equals("5")){
+                shopService.printProductsDetailsSorted(shop);
+            }
+
+
+        }while(!input.equals("6"));
     }
 }

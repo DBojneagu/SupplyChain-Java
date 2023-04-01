@@ -12,16 +12,26 @@ import model.Shop;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class ShopService {
+    private static Shop single_instance = null;
+    private ProductService productService = new ProductService();
+    public static synchronized Shop getInstance(){
+        if(single_instance == null){
+            single_instance = new Shop();
+        }
+        return single_instance;
+    }
     public void addProduct(Shop shop, Product product) {
         shop.getProducts().add(product);
         String message = "Product " + product.getName() + " was added to the shop";
         System.out.println(message);
     }
-    public void removeProduct(Shop shop, long id ){
-        shop.getProducts().removeIf(obj -> obj.getId() == id );
+
+    public void removeProduct(Shop shop, long id) {
+        shop.getProducts().removeIf(obj -> obj.getId() == id);
         System.out.println("Produsul a fost sters");
     }
 
@@ -30,17 +40,18 @@ public class ShopService {
         shop.getFurnitures().add(furniture);
 
     }
-    public void removeFurniture(Shop shop, long id ){
-        shop.getFurnitures().removeIf(obj -> obj.getId() == id );
+
+    public void removeFurniture(Shop shop, long id) {
+        shop.getFurnitures().removeIf(obj -> obj.getId() == id);
         System.out.println("Furniture a fost sters");
     }
 
-    public void addLighting(Shop shop, Lighting  lighting) {
+    public void addLighting(Shop shop, Lighting lighting) {
         shop.getProducts().add(lighting);
 
     }
 
-    public void addSmartHome(Shop shop, SmartHome  smartHome) {
+    public void addSmartHome(Shop shop, SmartHome smartHome) {
         shop.getProducts().add(smartHome);
 
     }
@@ -54,18 +65,20 @@ public class ShopService {
         }
         return numberOfProducts;
     }
+
     private int getNumberOfFurnitures(Shop shop) {
         int numberOfFurnitures = 0;
-        for (Product  f : shop.getFurnitures()) {
+        for (Product f : shop.getFurnitures()) {
             if (f != null) {
                 numberOfFurnitures++;
             }
         }
         return numberOfFurnitures;
     }
+
     private int getNumberOfSmartHomes(Shop shop) {
         int numberOfSmartHomes = 0;
-        for (Product  sm : shop.getSmartHomes()) {
+        for (Product sm : shop.getSmartHomes()) {
             if (sm != null) {
                 numberOfSmartHomes++;
             }
@@ -82,9 +95,10 @@ public class ShopService {
         }
         return numberOfLightings;
     }
+
     public void printFurnituresDetails(Shop shop) {
-        int  i = 0;
-        for (Product  f : shop.getFurnitures()) {
+        int i = 0;
+        for (Product f : shop.getFurnitures()) {
             i++;
             if (f != null) {
                 System.out.println(i + "->" + f);
@@ -93,8 +107,8 @@ public class ShopService {
     }
 
     public void printLightingsDetails(Shop shop) {
-        int  i = 0;
-        for (Product  l : shop.getLightings()) {
+        int i = 0;
+        for (Product l : shop.getLightings()) {
             i++;
             if (l != null) {
                 System.out.println(i + "->" + l);
@@ -103,8 +117,8 @@ public class ShopService {
     }
 
     public void printSmartHomesDetails(Shop shop) {
-        int  i = 0;
-        for (Product  sm : shop.getSmartHomes()) {
+        int i = 0;
+        for (Product sm : shop.getSmartHomes()) {
             i++;
             if (sm != null) {
                 System.out.println(i + "->" + sm);
@@ -113,13 +127,41 @@ public class ShopService {
     }
 
     public void printProductsDetails(Shop shop) {
-        int  i = 0;
+        int i = 0;
         for (Product p : shop.getProducts()) {
             i++;
             if (p != null) {
                 System.out.println(i + "->" + p);
             }
         }
+
+    }
+
+    public void printProductsDetailsByRange(Shop shop, int lower, int higher) {
+        int i = 0;
+        for (Product p : shop.getProducts()) {
+            i++;
+            if (p != null && p.getPrice() >= lower && p.getPrice() <= higher) {
+                System.out.println(i + "->" + p);
+            }
+        }
+    }
+
+    public void printProductsDetailsSorted(Shop shop) {
+         List<Product> sorted_products = shop.getProducts();
+        Collections.sort(sorted_products);
+        int i = 0;
+        for (Product p : sorted_products) {
+            i++;
+            if (p != null ) {
+                System.out.println(i + "->" + p);
+            }
+        }
+    }
+    public void init() {
+        addFurniture(getInstance(),productService.buildFurniture("Scaun",100,200,"matase",200,300));
+        System.out.println(getInstance());
+        printFurnituresDetails(getInstance());
     }
 }
 // nu stiu sigur daca l facem
