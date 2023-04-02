@@ -108,21 +108,37 @@ public class Shop {
 
     public void init() {
         Furniture added_furniture = productService.buildFurniture("Scaun", 200, 100, "bumbac", 10, 10);
-
         shopService.addProduct(getInstance(), added_furniture);
         shopService.addFurniture(getInstance(), added_furniture);
-        Furniture added_furniture2 = productService.buildFurniture("Canapea", 200, 100, "Piele Naturala", 200, 100);
 
+        Furniture added_furniture2 = productService.buildFurniture("Canapea", 500, 60, "Piele Naturala", 200, 100);
         shopService.addProduct(getInstance(), added_furniture2);
         shopService.addFurniture(getInstance(), added_furniture2);
-        Furniture added_furniture3 = productService.buildFurniture("Birou", 200, 100, "Stejar", 200, 160);
 
+        Furniture added_furniture3 = productService.buildFurniture("Birou", 700, 250, "Stejar", 200, 160);
         shopService.addProduct(getInstance(), added_furniture3);
         shopService.addFurniture(getInstance(), added_furniture3);
-        Furniture added_furniture4 = productService.buildFurniture("Noptiera", 200, 100, "Brad", 300, 450);
 
+        Furniture added_furniture4 = productService.buildFurniture("Noptiera", 50, 10, "Brad", 300, 450);
         shopService.addProduct(getInstance(), added_furniture4);
         shopService.addFurniture(getInstance(), added_furniture4);
+
+        Lighting added_lighting1 = productService.buildLighting("Bec", 200, 100, 300,"electric");
+        shopService.addProduct(getInstance(), added_lighting1);
+        shopService.addLighting(getInstance(), added_lighting1);
+
+        Lighting added_lighting2 = productService.buildLighting("Lanterna", 500, 20, 30,"electric");
+        shopService.addProduct(getInstance(), added_lighting2);
+        shopService.addLighting(getInstance(), added_lighting2);
+
+        SmartHome added_smarthome1 = productService.buildSmartHome("Dumbell", 200, 100, "LifeStyle","Stepper");
+        shopService.addProduct(getInstance(), added_smarthome1);
+        shopService.addSmartHome(getInstance(), added_smarthome1);
+
+        SmartHome added_smarthome2 = productService.buildSmartHome("Treadmill", 1000, 100, "Fitness","Now");
+        shopService.addProduct(getInstance(), added_smarthome2);
+        shopService.addSmartHome(getInstance(), added_smarthome2);
+
 
         Delivery added_delivery1 = actionService.buildDelivery("UPS", 200, "Mazda", "SUV");
         shopService.addAction(getInstance(), added_delivery1);
@@ -135,6 +151,38 @@ public class Shop {
         Delivery added_delivery3 = actionService.buildDelivery("SameDay", 1000, "Dacia", "Van");
         shopService.addAction(getInstance(), added_delivery3);
         shopService.addDelivery(getInstance(), added_delivery3);
+
+        Delivery added_delivery4 = actionService.buildDelivery("Fan", 1000, "Renault", "Van");
+        shopService.addAction(getInstance(), added_delivery4);
+        shopService.addDelivery(getInstance(), added_delivery4);
+
+        Measuring added_measuring1 = actionService.buildMeasuring("Ikea_Measuring", 2000, "Outside");
+        shopService.addAction(getInstance(), added_measuring1);
+        shopService.addMeasuring(getInstance(), added_measuring1);
+
+        Measuring added_measuring2 = actionService.buildMeasuring("Ikea_Measuring", 1000, "Inside");
+        shopService.addAction(getInstance(), added_measuring2);
+        shopService.addMeasuring(getInstance(), added_measuring2);
+
+        Assembly added_assembly1 = actionService.buildAssembly("Jenga", 10000, 10, 20);
+        shopService.addAction(getInstance(), added_assembly1);
+        shopService.addAssembly(getInstance(), added_assembly1);
+
+        Assembly added_assembly2 = actionService.buildAssembly("Ikea_Assemblers", 20000, 12, 15);
+        shopService.addAction(getInstance(), added_assembly2);
+        shopService.addAssembly(getInstance(), added_assembly2);
+
+        Order added_order = orderService.buildOrder(added_assembly1,added_furniture3);
+        shopService.addOrder(getInstance(),added_order);
+
+        Order added_order2 = orderService.buildOrder(added_assembly2,added_smarthome1);
+        shopService.addOrder(getInstance(),added_order2);
+
+        Order added_order3 = orderService.buildOrder(added_delivery1,added_lighting2);
+        shopService.addOrder(getInstance(),added_order3);
+
+        Order added_order4 = orderService.buildOrder(added_measuring1,added_furniture4);
+        shopService.addOrder(getInstance(),added_order4);
     }
     public void menu_productsAndActions() {
         do {
@@ -418,9 +466,10 @@ public class Shop {
             String input_orders;
             do {
                 System.out.println("Ikea Menu");
-                System.out.println("1. Add a new Order ");
+                System.out.println("1. Add a new Order "+  "                                                "+ "Total number of Orders " + shopService.getNumberOfOrders(getInstance()));
                 System.out.println("2. See all orders ");
-                System.out.println("3. Go back to main menu ");
+                System.out.println("3. Delete an order ");
+                System.out.println("4. Go back to main menu ");
                 input_orders = (scanner.nextLine());
                 if (input_orders.equals("1")) {
                     System.out.println("Please select a product, and the action wanted: ");
@@ -441,7 +490,14 @@ public class Shop {
                 else if (input_orders.equals("2")) {
                     shopService.printOrdersDetails(getInstance());
                 }
-            } while (!input_orders.equals("3"));
+                else if (input_orders.equals("3")) {
+                    shopService.printOrdersDetails(getInstance());
+                    System.out.print("Enter the ID of the order you want to remove: ");
+                    long orderId = scanner.nextLong();
+                    scanner.nextLine(); // consume the newline character
+                    shopService.removeOrders(getInstance(), orderId);
+                }
+            } while (!input_orders.equals("4"));
     }
 
 }

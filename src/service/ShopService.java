@@ -7,8 +7,6 @@ public class ShopService {
 
     public void addProduct(Shop shop, Product product) {
         shop.getProducts().add(product);
-        String message = "Product " + product.getName() + " was added to the shop";
-        System.out.println(message);
     }
 
     public void removeProduct(Shop shop, long id) {
@@ -18,14 +16,11 @@ public class ShopService {
 
     public void addAction(Shop shop, Action action) {
         shop.getActions().add(action);
-        String message = "Action " + action.getName() + " was added to the shop";
-        System.out.println(message);
+
     }
 
     public void addOrder(Shop shop, Order order) {
         shop.getOrders().add(order);
-        String message = "Order with Action " + order.getAction().getName() + " and product " + order.getProduct().getName() + "was added to the shop";
-        System.out.println(message);
     }
 
     public void removeAction(Shop shop, long id) {
@@ -88,6 +83,10 @@ public class ShopService {
         shop.getLightings().removeIf(obj -> obj.getId() == id);
         System.out.println("Lighting deleted");
     }
+    public void removeOrders(Shop shop, long id) {
+        shop.getOrders().removeIf(obj -> obj.getId() == id);
+        System.out.println("Order deleted");
+    }
 
     public void removeSmartHome(Shop shop, long id) {
         shop.getSmartHomes().removeIf(obj -> obj.getId() == id);
@@ -143,6 +142,8 @@ public class ShopService {
         }
         return numberOfDeliveries;
     }
+
+
 
     public int getNumberOfMeasurings(Shop shop) {
         int numberOfMeasurings = 0;

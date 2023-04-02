@@ -46,6 +46,6 @@ public class Order {
     }
     @Override
     public String toString () {
-        return " Id: "+ id +  " |  Action: " + action + " \n | Product  :  "  + product  + " | Price: "  + price  ;
+        return " Id: "+ id +  " |  Action: " + action + " \n            | Product  :  "  + product  + " | Price: "  + price + "\n"  ;
     }
 }
