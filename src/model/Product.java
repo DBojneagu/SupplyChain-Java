@@ -5,9 +5,9 @@ import service.*;
 
 public class Product  implements Comparable<Product>{
     private long id;
-    private String name;
-    private int price;
-    private int stock;
+    protected String name;
+    protected int price;
+    protected int stock;
 
 
     public Product(long id,String name, int price, int stock) {
