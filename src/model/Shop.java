@@ -3,9 +3,8 @@ import service.ProductService;
 import service.ShopService;
 import service.*;
 import model.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+
+import java.util.*;
 
 public class Shop {
     String input;
@@ -22,17 +21,17 @@ public class Shop {
     private List < Lighting > lightings = new ArrayList < > ();
     private List < SmartHome > smartHomes = new ArrayList < > ();
     private List < Action > actions = new ArrayList < > ();
-    private List < Order > orders = new ArrayList < > ();
+    private Map<Long, Order> orders = new HashMap<>();
     private List < Delivery > deliveries = new ArrayList < > ();
     private List < Measuring > measurings = new ArrayList < > ();
     private List < Assembly > assemblies = new ArrayList < > ();
     private static Shop single_instance = null;
 
-    public List<Order> getOrders() {
+    public Map<Long, Order> getOrders() {
         return orders;
     }
 
-    public void setOrders(List<Order> orders) {
+    public void setOrders(Map<Long, Order> orders) {
         this.orders = orders;
     }
 

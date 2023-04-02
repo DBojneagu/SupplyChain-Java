@@ -20,7 +20,7 @@ public class ShopService {
     }
 
     public void addOrder(Shop shop, Order order) {
-        shop.getOrders().add(order);
+        shop.getOrders().put(order.getId(), order);
     }
 
     public void removeAction(Shop shop, long id) {
@@ -84,7 +84,7 @@ public class ShopService {
         System.out.println("Lighting deleted");
     }
     public void removeOrders(Shop shop, long id) {
-        shop.getOrders().removeIf(obj -> obj.getId() == id);
+        shop.getOrders().remove(id);
         System.out.println("Order deleted");
     }
 
@@ -176,13 +176,7 @@ public class ShopService {
     }
 
     public int getNumberOfOrders(Shop shop) {
-        int numberOfOrders = 0;
-        for (Order o : shop.getOrders()) {
-            if (o != null) {
-                numberOfOrders++;
-            }
-        }
-        return numberOfOrders;
+        return shop.getOrders().size();
     }
 
     public void printFurnituresDetails(Shop shop) {
@@ -197,11 +191,9 @@ public class ShopService {
 
     public void printOrdersDetails(Shop shop) {
         int i = 0;
-        for (Order o : shop.getOrders()) {
+        for (Order order : shop.getOrders().values()) {
             i++;
-            if (o != null) {
-                System.out.println(i + "->" + o);
-            }
+            System.out.println(i + "->" + order);
         }
     }
 
