@@ -14,7 +14,7 @@ public class Shop {
     String input2;
     ShopService shopService = new ShopService();
     ProductService productService = new ProductService();
-
+    OrderService orderService = new OrderService();
     ActionService actionService = new ActionService();
     Scanner scanner = new Scanner(System.in);
     private List < Product > products = new ArrayList < > ();
@@ -22,10 +22,19 @@ public class Shop {
     private List < Lighting > lightings = new ArrayList < > ();
     private List < SmartHome > smartHomes = new ArrayList < > ();
     private List < Action > actions = new ArrayList < > ();
+    private List < Order > orders = new ArrayList < > ();
     private List < Delivery > deliveries = new ArrayList < > ();
     private List < Measuring > measurings = new ArrayList < > ();
     private List < Assembly > assemblies = new ArrayList < > ();
     private static Shop single_instance = null;
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
 
     public List < Action > getActions() {
         return actions;
@@ -127,7 +136,7 @@ public class Shop {
         shopService.addAction(getInstance(), added_delivery3);
         shopService.addDelivery(getInstance(), added_delivery3);
     }
-    public void menu() {
+    public void menu_productsAndActions() {
         do {
             System.out.println("Ikea Menu");
             System.out.println("1. Products");
@@ -402,9 +411,37 @@ public class Shop {
                     }
                 } while (!input2.equals("4"));
             }
-
         } while (!menutype.equals("3"));
 
+    }
+    public void menu_orders() {
+            String input_orders;
+            do {
+                System.out.println("Ikea Menu");
+                System.out.println("1. Add a new Order ");
+                System.out.println("2. See all orders ");
+                System.out.println("3. Go back to main menu ");
+                input_orders = (scanner.nextLine());
+                if (input_orders.equals("1")) {
+                    System.out.println("Please select a product, and the action wanted: ");
+                    shopService.printActionsDetails(getInstance());
+                    shopService.printProductsDetails(getInstance());
+                    System.out.println("The id of the product");
+                    int product_id = scanner.nextInt();
+                    scanner.nextLine();
+                    System.out.println("The id of the action");
+                    int action_id = scanner.nextInt();
+                    scanner.nextLine();
+
+                    Order added_order = orderService.buildOrder(shopService.getActionById(getInstance(),action_id),shopService.getProductById(getInstance(),product_id));
+                    shopService.addOrder(getInstance(),added_order);
+
+                }
+
+                else if (input_orders.equals("2")) {
+                    shopService.printOrdersDetails(getInstance());
+                }
+            } while (!input_orders.equals("3"));
     }
 
 }

@@ -22,6 +22,12 @@ public class ShopService {
         System.out.println(message);
     }
 
+    public void addOrder(Shop shop, Order order) {
+        shop.getOrders().add(order);
+        String message = "Order with Action " + order.getAction().getName() + " and product " + order.getProduct().getName() + "was added to the shop";
+        System.out.println(message);
+    }
+
     public void removeAction(Shop shop, long id) {
         shop.getActions().removeIf(obj -> obj.getId() == id);
         System.out.println("Action deleted");
@@ -168,12 +174,32 @@ public class ShopService {
         return numberOfLightings;
     }
 
+    public int getNumberOfOrders(Shop shop) {
+        int numberOfOrders = 0;
+        for (Order o : shop.getOrders()) {
+            if (o != null) {
+                numberOfOrders++;
+            }
+        }
+        return numberOfOrders;
+    }
+
     public void printFurnituresDetails(Shop shop) {
         int i = 0;
         for (Product f : shop.getFurnitures()) {
             i++;
             if (f != null) {
                 System.out.println(i + "->" + f);
+            }
+        }
+    }
+
+    public void printOrdersDetails(Shop shop) {
+        int i = 0;
+        for (Order o : shop.getOrders()) {
+            i++;
+            if (o != null) {
+                System.out.println(i + "->" + o);
             }
         }
     }
@@ -197,6 +223,8 @@ public class ShopService {
             }
         }
     }
+
+
 
     public void printProductsDetails(Shop shop) {
         int i = 0;
@@ -273,6 +301,26 @@ public class ShopService {
                 System.out.println(i + "->" + p);
             }
         }
+    }
+
+    public Product getProductById(Shop shop, int id) {
+
+        for (Product p : shop.getProducts()) {
+            if (p.getId() == id){
+                return p;
+            }
+        }
+        return null;
+    }
+
+    public Action getActionById(Shop shop, int id) {
+
+        for (Action a : shop.getActions()) {
+            if (a.getId() == id){
+                return a;
+            }
+        }
+        return null;
     }
 
 

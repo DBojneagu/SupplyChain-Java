@@ -1,4 +1,7 @@
 package model;
+import model.*;
+import service.*;
+
 
 public class Product  implements Comparable<Product>{
     private long id;
@@ -56,4 +59,5 @@ public class Product  implements Comparable<Product>{
     public int compareTo(Product p) {
         return Integer.compare(this.price, p.price);
     }
+
 }

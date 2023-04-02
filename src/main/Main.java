@@ -17,11 +17,11 @@ public class Main {
             System.out.println("3. Exit ");
             input = scanner.nextLine();
             if (input.equals("1")) {
-                shop.menu();
+                shop.menu_productsAndActions();
             }
-//            else if (input.equals("2")) {
-//                orders.menu();
-//            }
+        else if (input.equals("2")) {
+                shop.menu_orders();
+            }
         } while (!input.equals("3"));
     }
 }

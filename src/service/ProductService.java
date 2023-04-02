@@ -23,4 +23,5 @@ public class ProductService {
                 name, price, stock, category, appname);
     }
 
+
 }
