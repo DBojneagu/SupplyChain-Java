@@ -316,6 +316,112 @@ public class ShopService {
         return null;
     }
 
+    public boolean isValidProductId(Shop shop, long id, String productType) {
+        List<? extends Product> productList = null; // ? extends Product is the way that my list knows to work
+        // with any type of product, either furniture, lighting or smarthome, aka "downcasting"
+
+        switch (productType) {
+            case "1":
+                productList = shop.getFurnitures();
+                break;
+            case "2":
+                productList = shop.getLightings();
+                break;
+            case "3" :
+                productList = shop.getSmartHomes();
+        }
+
+        if (productList == null) {
+            return false;
+        }
+
+        for (Product p : productList) {
+            if (p.getId() == id) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public boolean isValidProductOnlyId(Shop shop, long id) {
+        List<? extends Product> productList = null; // ? extends Product is the way that my list knows to work
+        // with any type of product, either furniture, lighting or smarthome, aka "downcasting"
+
+       productList = shop.getProducts();
+
+        if (productList == null) {
+            return false;
+        }
+
+        for (Product p : productList) {
+            if (p.getId() == id) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public boolean isValidActionId(Shop shop, long id, String actionType) {
+        List<? extends Action> actionList = null; // ? extends Product is the way that my list knows to work
+        // with any type of product, either furniture, lighting or smarthome, aka "downcasting"
+
+        switch (actionType) {
+            case "1":
+                actionList = shop.getDeliveries();
+                break;
+            case "2":
+                actionList = shop.getMeasurings();
+                break;
+            case "3" :
+                actionList = shop.getAssemblies();
+        }
+
+        if (actionList == null) {
+            return false;
+        }
+
+        for (Action a : actionList) {
+            if (a.getId() == id) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public boolean isValidActionOnlyId(Shop shop, long id) {
+        List<? extends Action> actionList = null; // ? extends Product is the way that my list knows to work
+        // with any type of product, either furniture, lighting or smarthome, aka "downcasting"
+
+        actionList = shop.getActions();
+
+        if (actionList == null) {
+            return false;
+        }
+
+        for (Action a : actionList) {
+            if (a.getId() == id) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public boolean isValidOrder(Shop shop, long id) {
+        Map<Long, ? extends Order> orderMap = null; // ? extends Product is the way that my map knows to work with any type of product, either furniture, lighting or smarthome, aka "downcasting"
+
+        orderMap = shop.getOrders();
+
+        if (orderMap == null) {
+            return false;
+        }
+
+        return orderMap.containsKey(id);
+    }
+
 
 }
 // nu stiu sigur daca l facem

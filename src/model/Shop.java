@@ -21,17 +21,17 @@ public class Shop {
     private List < Lighting > lightings = new ArrayList < > ();
     private List < SmartHome > smartHomes = new ArrayList < > ();
     private List < Action > actions = new ArrayList < > ();
-    private Map<Long, Order> orders = new HashMap<>();
+    private Map < Long, Order > orders = new HashMap < > ();
     private List < Delivery > deliveries = new ArrayList < > ();
     private List < Measuring > measurings = new ArrayList < > ();
     private List < Assembly > assemblies = new ArrayList < > ();
     private static Shop single_instance = null;
 
-    public Map<Long, Order> getOrders() {
+    public Map < Long, Order > getOrders() {
         return orders;
     }
 
-    public void setOrders(Map<Long, Order> orders) {
+    public void setOrders(Map < Long, Order > orders) {
         this.orders = orders;
     }
 
@@ -122,19 +122,35 @@ public class Shop {
         shopService.addProduct(getInstance(), added_furniture4);
         shopService.addFurniture(getInstance(), added_furniture4);
 
-        Lighting added_lighting1 = productService.buildLighting("Bec", 200, 100, 300,"electric");
+        Furniture added_furniture5 = productService.buildFurniture("Fotoliu", 500, 150, "Piele", 400, 450);
+        shopService.addProduct(getInstance(), added_furniture5);
+        shopService.addFurniture(getInstance(), added_furniture5);
+
+        Furniture added_furniture6 = productService.buildFurniture("Masa", 1000, 5, "Lemn", 500, 150);
+        shopService.addProduct(getInstance(), added_furniture6);
+        shopService.addFurniture(getInstance(), added_furniture6);
+
+        Furniture added_furniture7 = productService.buildFurniture("Canapea", 3000, 1403, "Piele Intoarsa", 200, 350);
+        shopService.addProduct(getInstance(), added_furniture7);
+        shopService.addFurniture(getInstance(), added_furniture7);
+
+        Furniture added_furniture8 = productService.buildFurniture("Scaun", 20, 110, "Lemn", 100, 150);
+        shopService.addProduct(getInstance(), added_furniture8);
+        shopService.addFurniture(getInstance(), added_furniture8);
+
+        Lighting added_lighting1 = productService.buildLighting("Bec", 200, 100, 300, "electric");
         shopService.addProduct(getInstance(), added_lighting1);
         shopService.addLighting(getInstance(), added_lighting1);
 
-        Lighting added_lighting2 = productService.buildLighting("Lanterna", 500, 20, 30,"electric");
+        Lighting added_lighting2 = productService.buildLighting("Lanterna", 500, 20, 30, "electric");
         shopService.addProduct(getInstance(), added_lighting2);
         shopService.addLighting(getInstance(), added_lighting2);
 
-        SmartHome added_smarthome1 = productService.buildSmartHome("Dumbell", 200, 100, "LifeStyle","Stepper");
+        SmartHome added_smarthome1 = productService.buildSmartHome("Dumbell", 200, 100, "LifeStyle", "Stepper");
         shopService.addProduct(getInstance(), added_smarthome1);
         shopService.addSmartHome(getInstance(), added_smarthome1);
 
-        SmartHome added_smarthome2 = productService.buildSmartHome("Treadmill", 1000, 100, "Fitness","Now");
+        SmartHome added_smarthome2 = productService.buildSmartHome("Treadmill", 1000, 100, "Fitness", "Now");
         shopService.addProduct(getInstance(), added_smarthome2);
         shopService.addSmartHome(getInstance(), added_smarthome2);
 
@@ -171,17 +187,17 @@ public class Shop {
         shopService.addAction(getInstance(), added_assembly2);
         shopService.addAssembly(getInstance(), added_assembly2);
 
-        Order added_order = orderService.buildOrder(added_assembly1,added_furniture3);
-        shopService.addOrder(getInstance(),added_order);
+        Order added_order = orderService.buildOrder(added_assembly1, added_furniture3);
+        shopService.addOrder(getInstance(), added_order);
 
-        Order added_order2 = orderService.buildOrder(added_assembly2,added_smarthome1);
-        shopService.addOrder(getInstance(),added_order2);
+        Order added_order2 = orderService.buildOrder(added_assembly2, added_smarthome1);
+        shopService.addOrder(getInstance(), added_order2);
 
-        Order added_order3 = orderService.buildOrder(added_delivery1,added_lighting2);
-        shopService.addOrder(getInstance(),added_order3);
+        Order added_order3 = orderService.buildOrder(added_delivery1, added_lighting2);
+        shopService.addOrder(getInstance(), added_order3);
 
-        Order added_order4 = orderService.buildOrder(added_measuring1,added_furniture4);
-        shopService.addOrder(getInstance(),added_order4);
+        Order added_order4 = orderService.buildOrder(added_measuring1, added_furniture4);
+        shopService.addOrder(getInstance(), added_order4);
     }
     public void menu_productsAndActions() {
         do {
@@ -190,41 +206,91 @@ public class Shop {
             System.out.println("2. Actions ");
             System.out.println("3. Exit  ");
             menutype = scanner.nextLine();
+            while (! menutype.equals("1") && ! menutype.equals("2") && ! menutype.equals("3")) {
+                System.out.println("Invalid input. Please enter a valid option: ");
+                menutype= scanner.nextLine();
+            }
 
 
             if (menutype.equals("1")) {
 
                 do {
                     System.out.println("Ikea Menu");
-                    System.out.println("1. Add a new Product Information" + "                                       "+"Total number of Products " + shopService.getNumberOfProducts(getInstance()) );
-                    System.out.println("2. Get the description of  products  " + "                                  "+"Number of Furnitures : " + shopService.getNumberOfFurnitures(getInstance()) );
-                    System.out.println("3. Delete a product  " + "                                                  "+"Number of Lightings : "+ shopService.getNumberOfLightings(getInstance()));
-                    System.out.println("4. Search products by price range " + "                                     "+ "Number of SmartHomes : " + shopService.getNumberOfSmartHomes(getInstance()));
+                    System.out.println("1. Add a new Product Information" + "                                       " + "Total number of Products " + shopService.getNumberOfProducts(getInstance()));
+                    System.out.println("2. Get the description of  products  " + "                                  " + "Number of Furnitures : " + shopService.getNumberOfFurnitures(getInstance()));
+                    System.out.println("3. Delete a product  " + "                                                  " + "Number of Lightings : " + shopService.getNumberOfLightings(getInstance()));
+                    System.out.println("4. Search products by price range " + "                                     " + "Number of SmartHomes : " + shopService.getNumberOfSmartHomes(getInstance()));
                     System.out.println("5. Sort the products by price ");
                     System.out.println("6. Go back to main menu ");
                     input = (scanner.nextLine());
+                    while (! input.equals("1") && ! input.equals("2") && ! input.equals("3") && ! input.equals("4") && ! input.equals("5") && ! input.equals("6")) {
+                        System.out.println("Invalid input. Please enter a valid option: ");
+                        input= scanner.nextLine();
+                    }
                     if (input.equals("1")) {
                         System.out.println("Please specify the details for creating a new product: What category do you want it to be?");
                         System.out.println("1. Furniture");
                         System.out.println("2. Lighting");
                         System.out.println("3. SmartHome");
                         String productType = scanner.nextLine();
+
+                        while (!productType.equals("1") && !productType.equals("2") && !productType.equals("3")) {
+                            System.out.println("Invalid input. Please enter a valid option: ");
+                            productType = scanner.nextLine();
+                        }
                         switch (productType) {
                             case "1":
                                 System.out.println("Name:");
                                 String name = scanner.nextLine();
-                                System.out.println("Price:");
-                                int price = scanner.nextInt();
-                                System.out.println("Stock:");
-                                int stock = scanner.nextInt();
+                                int price = 0;
+                                boolean validPrice = false;
+                                while (!validPrice) {
+                                    try {
+                                        System.out.println("Price:");
+                                        price = Integer.parseInt(scanner.nextLine());
+                                        validPrice = true;
+                                    } catch (NumberFormatException e) {
+                                        System.out.println("Invalid input. Please enter a valid integer for the price.");
+                                    }
+                                }
+                                int stock = 0;
+                                boolean validStock = false;
+                                while (!validStock) {
+                                    try {
+                                        System.out.println("Stock:");
+                                        stock = Integer.parseInt(scanner.nextLine());
+                                        validStock = true;
+                                    } catch (NumberFormatException e) {
+                                        System.out.println("Invalid input. Please enter a valid integer for the stock.");
+                                    }
+                                }
+
                                 System.out.println("Material:");
-                                scanner.nextLine();
                                 String material = scanner.nextLine();
-                                System.out.println("height:");
-                                double height = scanner.nextDouble();
-                                System.out.println("Width:");
-                                double width = scanner.nextDouble();
-                                scanner.nextLine();
+                                double height = 0.0;
+                                boolean validHeight = false;
+                                while (!validHeight) {
+                                    try {
+                                        System.out.println("height:");
+                                        height = Double.parseDouble(scanner.nextLine());
+                                        validHeight = true;
+                                    } catch (NumberFormatException e) {
+                                        System.out.println("Invalid input. Please enter a valid double for the height.");
+                                    }
+                                }
+
+                                double width = 0.0;
+                                boolean validWidth = false;
+                                while (!validWidth) {
+                                    try {
+                                        System.out.println("Width:");
+                                        width = Double.parseDouble(scanner.nextLine());
+                                        validWidth = true;
+                                    } catch (NumberFormatException e) {
+                                        System.out.println("Invalid input. Please enter a valid double for the width.");
+                                    }
+                                }
+
                                 Furniture added_furniture = productService.buildFurniture(name, price, stock, material, height, width);
                                 shopService.addProduct(getInstance(), added_furniture);
                                 shopService.addFurniture(getInstance(), added_furniture);
@@ -232,32 +298,78 @@ public class Shop {
                             case "2":
                                 System.out.println("Name:");
                                 name = scanner.nextLine();
-                                System.out.println("Price:");
-                                price = scanner.nextInt();
-                                System.out.println("Stock:");
-                                stock = scanner.nextInt();
-                                System.out.println("power:");
-                                int power = scanner.nextInt();
+                                price = 0;
+                                validPrice = false;
+                                while (!validPrice) {
+                                    try {
+                                        System.out.println("Price:");
+                                        price = Integer.parseInt(scanner.nextLine());
+                                        validPrice = true;
+                                    } catch (NumberFormatException e) {
+                                        System.out.println("Invalid input. Please enter a valid integer for the price.");
+                                    }
+                                }
+                                stock = 0;
+                                validStock = false;
+                                while (!validStock) {
+                                    try {
+                                        System.out.println("Stock:");
+                                        stock = Integer.parseInt(scanner.nextLine());
+                                        validStock = true;
+                                    } catch (NumberFormatException e) {
+                                        System.out.println("Invalid input. Please enter a valid integer for the stock.");
+                                    }
+                                }
+
+                                int power = 0;
+                                boolean validPower = false;
+                                while (!validPower) {
+                                    try {
+                                        System.out.println("power:");
+                                        power = Integer.parseInt(scanner.nextLine());
+                                        validPower = true;
+                                    } catch (NumberFormatException e) {
+                                        System.out.println("Invalid input. Please enter a valid integer for the power.");
+                                    }
+                                }
+
                                 System.out.println("type:");
-                                scanner.nextLine();
                                 String type = scanner.nextLine();
                                 Lighting added_lighting = productService.buildLighting(name, price, stock, power, type);
                                 shopService.addProduct(getInstance(), added_lighting);
                                 shopService.addLighting(getInstance(), added_lighting);
                                 break;
-
                             case "3":
                                 System.out.println("Name:");
                                 name = scanner.nextLine();
-                                System.out.println("Price:");
-                                price = scanner.nextInt();
-                                System.out.println("Stock:");
-                                stock = scanner.nextInt();
+                                price = 0;
+                                validPrice = false;
+                                while (!validPrice) {
+                                    try {
+                                        System.out.println("Price:");
+                                        price = Integer.parseInt(scanner.nextLine());
+                                        validPrice = true;
+                                    } catch (NumberFormatException e) {
+                                        System.out.println("Invalid input. Please enter a valid integer for the price.");
+                                    }
+                                }
+                                stock = 0;
+                                validStock = false;
+                                while (!validStock) {
+                                    try {
+                                        System.out.println("Stock:");
+                                        stock = Integer.parseInt(scanner.nextLine());
+                                        validStock = true;
+                                    } catch (NumberFormatException e) {
+                                        System.out.println("Invalid input. Please enter a valid integer for the stock.");
+                                    }
+                                }
                                 System.out.println("Category:");
                                 scanner.nextLine();
                                 String category = scanner.nextLine();
                                 System.out.println("appname : ");
                                 String appname = scanner.nextLine();
+
                                 SmartHome added_smarthome = productService.buildSmartHome(name, price, stock, category, appname);
                                 shopService.addProduct(getInstance(), added_smarthome);
                                 shopService.addSmartHome(getInstance(), added_smarthome);
@@ -265,25 +377,32 @@ public class Shop {
                         }
                     }
                     if (input.equals("2")) {
-                        System.out.println("What products do you exactly want to see?");
-                        System.out.println("1. All products");
-                        System.out.println("2. Only Furniture Products");
-                        System.out.println("3. Only Lighting Products");
-                        System.out.println("4. Only Smarthome Products");
-                        String input_afis = scanner.nextLine();
-                        switch (input_afis) {
-                            case "1":
-                                shopService.printProductsDetails(getInstance());
-                                break;
-                            case "2":
-                                shopService.printFurnituresDetails(getInstance());
-                                break;
-                            case "3":
-                                shopService.printLightingsDetails(getInstance());
-                                break;
-                            case "4":
-                                shopService.printSmartHomesDetails(getInstance());
-                                break;
+                        while (true) {
+                            System.out.println("What products do you exactly want to see?");
+                            System.out.println("1. All products");
+                            System.out.println("2. Only Furniture Products");
+                            System.out.println("3. Only Lighting Products");
+                            System.out.println("4. Only Smarthome Products");
+                            String input_afis = scanner.nextLine();
+
+                            switch (input_afis) {
+                                case "1":
+                                    shopService.printProductsDetails(getInstance());
+                                    break;
+                                case "2":
+                                    shopService.printFurnituresDetails(getInstance());
+                                    break;
+                                case "3":
+                                    shopService.printLightingsDetails(getInstance());
+                                    break;
+                                case "4":
+                                    shopService.printSmartHomesDetails(getInstance());
+                                    break;
+                                default:
+                                    System.out.println("Invalid input. Please enter a valid option.");
+                                    continue;
+                            }
+                            break;
                         }
                     }
                     if (input.equals("3")) {
@@ -292,43 +411,89 @@ public class Shop {
                         System.out.println("2. Lighting");
                         System.out.println("3. SmartHome ");
                         String product_type = scanner.nextLine();
-                        switch (product_type) {
-                            case "1" :
-                                shopService.printFurnituresDetails(getInstance());
-                                System.out.print("Enter the ID of the furniture you want to remove: ");
-                                long furnitureId = scanner.nextLong();
-                                scanner.nextLine(); // consume the newline character
-                                shopService.removeFurniture(getInstance(), furnitureId);
-                                shopService.removeProduct(getInstance(), furnitureId);
-                                break;
-                            case "2":
-                                shopService.printLightingsDetails(getInstance());
-                                System.out.print("Enter the ID of the Lighting you want to remove: ");
-                                long lightingId = scanner.nextLong();
-                                scanner.nextLine(); // consume the newline character
-                                shopService.removeLighting(getInstance(), lightingId);
-                                shopService.removeProduct(getInstance(), lightingId);
-                                break;
-                            case "3" :
-                                shopService.printSmartHomesDetails(getInstance());
-                                System.out.print("Enter the ID of the SmartHome you want to remove: ");
-                                long smarthomeId = scanner.nextLong();
-                                scanner.nextLine(); // consume the newline character
-                                shopService.removeSmartHome(getInstance(), smarthomeId);
-                                shopService.removeProduct(getInstance(), smarthomeId);
-                                break;
+                        while (!product_type.equals("1") && !product_type.equals("2") && !product_type.equals("3")) {
+                            System.out.println("Invalid input. Please enter a valid option: ");
+                            product_type = scanner.nextLine();
+                        }
+                        while (true) {
+                            switch (product_type) {
+                                case "1":
+                                    shopService.printFurnituresDetails(getInstance());
+                                    System.out.print("Enter the ID of the furniture you want to remove: ");
+                                    long furnitureId = scanner.nextLong();
+                                    scanner.nextLine();
+
+
+                                    if (!shopService.isValidProductId(getInstance(), furnitureId, "1")) {
+                                        System.out.println("Invalid ID entered. Please try again.");
+                                        continue;
+                                    }
+
+                                    shopService.removeFurniture(getInstance(), furnitureId);
+                                    shopService.removeProduct(getInstance(), furnitureId);
+                                    break;
+                                case "2":
+                                    shopService.printLightingsDetails(getInstance());
+                                    System.out.print("Enter the ID of the Lighting you want to remove: ");
+                                    long lightingId = scanner.nextLong();
+                                    scanner.nextLine();
+
+                                    if (!shopService.isValidProductId(getInstance(), lightingId, "2")) {
+                                        System.out.println("Invalid ID entered. Please try again.");
+                                        continue;
+                                    }
+
+                                    shopService.removeLighting(getInstance(), lightingId);
+                                    shopService.removeProduct(getInstance(), lightingId);
+                                    break;
+                                case "3":
+                                    shopService.printSmartHomesDetails(getInstance());
+                                    System.out.print("Enter the ID of the SmartHome you want to remove: ");
+                                    long smarthomeId = scanner.nextLong();
+                                    scanner.nextLine();
+
+                                    if (!shopService.isValidProductId(getInstance(), smarthomeId, "3")) {
+                                        System.out.println("Invalid ID entered. Please try again.");
+                                        continue;
+                                    }
+
+                                    shopService.removeSmartHome(getInstance(), smarthomeId);
+                                    shopService.removeProduct(getInstance(), smarthomeId);
+                                    break;
+                                default:
+                                    continue;
+                            }
+                            break;
                         }
                     }
                     if (input.equals("4")) { // show products by price range
-                        System.out.print("Enter minumum: ");
-                        int lower = scanner.nextInt();
-                        scanner.nextLine();
+                        int min = 0;
+                        boolean validMin = false;
+                        while (!validMin) {
+                            try {
+                                System.out.println("Minumum:");
+                                min = Integer.parseInt(scanner.nextLine());
+                                validMin = true;
+                            } catch (NumberFormatException e) {
+                                System.out.println("Invalid input. Please enter a valid integer for the min value.");
+                            }
+                        }
 
-                        System.out.print("Enter maximum: ");
-                        int higher = scanner.nextInt();
-                        scanner.nextLine();
 
-                        shopService.printProductsDetailsByRange(getInstance(), lower, higher);
+                        int max = 0;
+                        boolean validMax = false;
+                        while (!validMax) {
+                            try {
+                                System.out.println("Maximum:");
+                                max = Integer.parseInt(scanner.nextLine());
+                                validMax = true;
+                            } catch (NumberFormatException e) {
+                                System.out.println("Invalid input. Please enter a valid integer max value.");
+                            }
+                        }
+
+
+                        shopService.printProductsDetailsByRange(getInstance(), min, max);
 
                     }
 
@@ -341,29 +506,49 @@ public class Shop {
 
                 do {
                     System.out.println("Ikea Menu");
-                    System.out.println("1. Add a new Action" + "                                                "+ "Total number of Actions " + shopService.getNumberOfActions(getInstance()));
-                    System.out.println("2. Get all the actions available " + "                                  "+ "Number of Deliveries : " + shopService.getNumberOfDeliveries(getInstance()));
-                    System.out.println("3. Delete an existing action " + "                                      "+ "Number of Measurings : "+ shopService.getNumberOfMeasurings(getInstance()));
-                    System.out.println("4. Go back to main menu " + "                                           "+ "Number of Assemblies : " + shopService.getNumberOfAssembly(getInstance()));
+                    System.out.println("1. Add a new Action" + "                                                " + "Total number of Actions " + shopService.getNumberOfActions(getInstance()));
+                    System.out.println("2. Get all the actions available " + "                                  " + "Number of Deliveries : " + shopService.getNumberOfDeliveries(getInstance()));
+                    System.out.println("3. Delete an existing action " + "                                      " + "Number of Measurings : " + shopService.getNumberOfMeasurings(getInstance()));
+                    System.out.println("4. Go back to main menu " + "                                           " + "Number of Assemblies : " + shopService.getNumberOfAssembly(getInstance()));
                     input2 = scanner.nextLine();
+
+                    while (!input2.equals("1") && !input2.equals("2") && !input2.equals("3") && !input2.equals("4")) {
+                        System.out.println("Invalid input. Please enter a valid option: ");
+                        input2 = scanner.nextLine();
+                    }
+
                     if (input2.equals("1")) {
                         System.out.println("Please specify the details for creating a new action: What category do you want it to be?");
                         System.out.println("1. Delivery");
                         System.out.println("2. Measuring");
                         System.out.println("3. Assembly");
                         String actionType = scanner.nextLine();
+
+                        while (!actionType.equals("1") && !actionType.equals("2") && !actionType.equals("3")) {
+                            System.out.println("Invalid input. Please enter a valid option: ");
+                            actionType = scanner.nextLine();
+                        }
                         switch (actionType) {
                             case "1":
                                 System.out.println("Name:");
                                 String name = scanner.nextLine();
-                                System.out.println("Price:");
-                                int price = scanner.nextInt();
-                                scanner.nextLine();
+                                int price = 0;
+                                boolean validPrice = false;
+                                while (!validPrice) {
+                                    try {
+                                        System.out.println("Price:");
+                                        price = Integer.parseInt(scanner.nextLine());
+                                        validPrice = true;
+                                    } catch (NumberFormatException e) {
+                                        System.out.println("Invalid input. Please enter a valid integer for the price.");
+                                    }
+                                }
+
                                 System.out.println("Vehicle Brand");
                                 String vehicle_brand = scanner.nextLine();
                                 System.out.println("Vehicle Type:");
                                 String vehicle_type = scanner.nextLine();
-                                scanner.nextLine();
+
 
                                 Delivery added_delivery = actionService.buildDelivery(name, price, vehicle_brand, vehicle_type);
                                 shopService.addDelivery(getInstance(), added_delivery);
@@ -372,9 +557,18 @@ public class Shop {
                             case "2":
                                 System.out.println("Name:");
                                 name = scanner.nextLine();
-                                System.out.println("Price:");
-                                price = scanner.nextInt();
-                                scanner.nextLine();
+                                price = 0;
+                                validPrice = false;
+                                while (!validPrice) {
+                                    try {
+                                        System.out.println("Price:");
+                                        price = Integer.parseInt(scanner.nextLine());
+                                        validPrice = true;
+                                    } catch (NumberFormatException e) {
+                                        System.out.println("Invalid input. Please enter a valid integer for the price.");
+                                    }
+                                }
+
                                 System.out.println("Category:");
                                 String category = scanner.nextLine();
 
@@ -386,20 +580,46 @@ public class Shop {
                             case "3":
                                 System.out.println("Name:");
                                 name = scanner.nextLine();
-                                System.out.println("Price:");
-                                price = scanner.nextInt();
-                                System.out.println("Number of products to be assembled");
-                                int number_of_products = scanner.nextInt();
-                                System.out.println("Number of employees needed");
-                                int number_of_employees = scanner.nextInt();
-                                scanner.nextLine();
-                                Assembly added_assembly = actionService.buildAssembly(name, price, number_of_products, number_of_employees);
+                                price = 0;
+                                validPrice = false;
+                                while (!validPrice) {
+                                    try {
+                                        System.out.println("Price:");
+                                        price = Integer.parseInt(scanner.nextLine());
+                                        validPrice = true;
+                                    } catch (NumberFormatException e) {
+                                        System.out.println("Invalid input. Please enter a valid integer for the price.");
+                                    }
+                                }
+                                int nr_of_prod = 0;
+                                boolean validNr_of_prod = false;
+                                while (!validNr_of_prod) {
+                                    try {
+                                        System.out.println("Number of Products:");
+                                        nr_of_prod = Integer.parseInt(scanner.nextLine());
+                                        validNr_of_prod = true;
+                                    } catch (NumberFormatException e) {
+                                        System.out.println("Invalid input. Please enter a valid integer for the number of products.");
+                                    }
+                                }
+                                int nr_of_emp = 0;
+                                boolean validNr_of_emp = false;
+                                while (!validNr_of_emp) {
+                                    try {
+                                        System.out.println("Number of Employees:");
+                                        nr_of_emp = Integer.parseInt(scanner.nextLine());
+                                        validNr_of_emp = true;
+                                    } catch (NumberFormatException e) {
+                                        System.out.println("Invalid input. Please enter a valid integer for the number of products.");
+                                    }
+                                }
+
+                                Assembly added_assembly = actionService.buildAssembly(name, price, nr_of_prod, nr_of_emp);
                                 shopService.addAction(getInstance(), added_assembly);
                                 shopService.addAssembly(getInstance(), added_assembly);
                                 break;
                         }
-                    }
-                    else if (input2.equals("2")) {
+                    } else if (input2.equals("2")) {
                         System.out.println("What Actions do you exactly want to see?");
                         System.out.println("1. All Actions");
                         System.out.println("2. Only Delivery Actions");
@@ -421,39 +641,59 @@ public class Shop {
                                 break;
                         }
 
-                    }
-                    else if (input2.equals("3")) {
+                    } else if (input2.equals("3")) {
 
                         System.out.println("What type of action do you want to remove? ");
                         System.out.println("1. Delivery ");
                         System.out.println("2. Measuring");
                         System.out.println("3. Assembly ");
                         String action_type = scanner.nextLine();
-                        switch (action_type) {
-                            case "1" :
-                                shopService.printDeliveryDetails(getInstance());
-                                System.out.print("Enter the ID of the delivery you want to remove: ");
-                                long deliveryId = scanner.nextLong();
-                                scanner.nextLine(); // consume the newline character
-                                shopService.removeDelivery(getInstance(), deliveryId);
-                                shopService.removeAction(getInstance(), deliveryId);
-                                break;
-                            case "2":
-                                shopService.printMeasuringDetails(getInstance());
-                                System.out.print("Enter the ID of the measuring you want to remove: ");
-                                long measuringId = scanner.nextLong();
-                                scanner.nextLine(); // consume the newline character
-                                shopService.removeMeasuring(getInstance(), measuringId);
-                                shopService.removeAction(getInstance(), measuringId);
-                                break;
-                            case "3" :
-                                shopService.printAssemblyDetails(getInstance());
-                                System.out.print("Enter the ID of the assembly you want to remove: ");
-                                long assemblyId = scanner.nextLong();
-                                scanner.nextLine(); // consume the newline character
-                                shopService.removeAssembly(getInstance(), assemblyId);
-                                shopService.removeAction(getInstance(), assemblyId);
-                                break;
+                        while (!action_type.equals("1") && !action_type.equals("2") && !action_type.equals("3")) {
+                            System.out.println("Invalid input. Please enter a valid option: ");
+                            action_type = scanner.nextLine();
+                        }
+                        while (true) {
+                            switch (action_type) {
+                                case "1":
+                                    shopService.printDeliveryDetails(getInstance());
+                                    System.out.print("Enter the ID of the delivery you want to remove: ");
+                                    long deliveryId = scanner.nextLong();
+                                    if (!shopService.isValidActionId(getInstance(), deliveryId, "1")) {
+                                        System.out.println("Invalid ID entered. Please try again.");
+                                        continue;
+                                    }
+                                    scanner.nextLine();
+                                    shopService.removeDelivery(getInstance(), deliveryId);
+                                    shopService.removeAction(getInstance(), deliveryId);
+                                    break;
+                                case "2":
+                                    shopService.printMeasuringDetails(getInstance());
+                                    System.out.print("Enter the ID of the measuring you want to remove: ");
+                                    long measuringId = scanner.nextLong();
+                                    if (!shopService.isValidActionId(getInstance(), measuringId, "2")) {
+                                        System.out.println("Invalid ID entered. Please try again.");
+                                        continue;
+                                    }
+                                    shopService.removeMeasuring(getInstance(), measuringId);
+                                    shopService.removeAction(getInstance(), measuringId);
+                                    break;
+                                case "3":
+                                    shopService.printAssemblyDetails(getInstance());
+                                    System.out.print("Enter the ID of the assembly you want to remove: ");
+                                    long assemblyId = scanner.nextLong();
+
+                                    if (!shopService.isValidActionId(getInstance(), assemblyId, "3")) {
+                                        System.out.println("Invalid ID entered. Please try again.");
+                                        continue;
+                                    }
+                                    scanner.nextLine();
+                                    shopService.removeAssembly(getInstance(), assemblyId);
+                                    shopService.removeAction(getInstance(), assemblyId);
+                                    break;
+                                default:
+                                    break;
+                            }
+                            break;
                         }
                     }
                 } while (!input2.equals("4"));
@@ -462,41 +702,72 @@ public class Shop {
 
     }
     public void menu_orders() {
-            String input_orders;
-            do {
-                System.out.println("Ikea Menu");
-                System.out.println("1. Add a new Order "+  "                                                "+ "Total number of Orders " + shopService.getNumberOfOrders(getInstance()));
-                System.out.println("2. See all orders ");
-                System.out.println("3. Delete an order ");
-                System.out.println("4. Go back to main menu ");
-                input_orders = (scanner.nextLine());
-                if (input_orders.equals("1")) {
-                    System.out.println("Please select a product, and the action wanted: ");
-                    shopService.printActionsDetails(getInstance());
+        String input_orders;
+        do {
+            System.out.println("Ikea Menu");
+            System.out.println("1. Add a new Order " + "                                                " + "Total number of Orders " + shopService.getNumberOfOrders(getInstance()));
+            System.out.println("2. See all orders ");
+            System.out.println("3. Delete an order ");
+            System.out.println("4. Go back to main menu ");
+            input_orders = (scanner.nextLine());
+
+            if (input_orders.equals("1")) {
+
+                boolean validProductId = false;
+                int product_id = 0;
+
+                while (!validProductId) {
+                    System.out.println("Please select a product wanted: ");
                     shopService.printProductsDetails(getInstance());
                     System.out.println("The id of the product");
-                    int product_id = scanner.nextInt();
+                    product_id = scanner.nextInt();
+
+                    if (!shopService.isValidProductOnlyId(getInstance(), product_id)) {
+                        System.out.println("Invalid ID entered. Please try again.");
+                    } else {
+                        validProductId = true;
+                    }
                     scanner.nextLine();
+                }
+
+                boolean validActionId = false;
+                int action_id = 0;
+
+                while (!validActionId) {
+                    System.out.println("Please  the action wanted: ");
+                    shopService.printActionsDetails(getInstance());
                     System.out.println("The id of the action");
-                    int action_id = scanner.nextInt();
+                    action_id = scanner.nextInt();
+
+                    if (!shopService.isValidActionOnlyId(getInstance(), action_id)) {
+                        System.out.println("Invalid ID entered. Please try again.");
+                    } else {
+                        validActionId = true;
+                    }
                     scanner.nextLine();
-
-                    Order added_order = orderService.buildOrder(shopService.getActionById(getInstance(),action_id),shopService.getProductById(getInstance(),product_id));
-                    shopService.addOrder(getInstance(),added_order);
-
                 }
 
-                else if (input_orders.equals("2")) {
-                    shopService.printOrdersDetails(getInstance());
-                }
-                else if (input_orders.equals("3")) {
-                    shopService.printOrdersDetails(getInstance());
+                Order added_order = orderService.buildOrder(shopService.getActionById(getInstance(), action_id), shopService.getProductById(getInstance(), product_id));
+                shopService.addOrder(getInstance(), added_order);
+            } else if (input_orders.equals("2")) {
+                shopService.printOrdersDetails(getInstance());
+            } else if (input_orders.equals("3")) {
+                shopService.printOrdersDetails(getInstance());
+
+                while (true) {
                     System.out.print("Enter the ID of the order you want to remove: ");
                     long orderId = scanner.nextLong();
-                    scanner.nextLine(); // consume the newline character
+                    scanner.nextLine();
+                    if (!shopService.isValidOrder(getInstance(), orderId)) {
+                        System.out.println("Invalid ID entered. Please try again.");
+                        continue;
+                    }
+
                     shopService.removeOrders(getInstance(), orderId);
+                    break;
                 }
-            } while (!input_orders.equals("4"));
+            }
+        } while (!input_orders.equals("4"));
     }
 
 }
