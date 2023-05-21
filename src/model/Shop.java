@@ -263,10 +263,11 @@ public class Shop {
 
                 do {
                     System.out.println("Ikea Menu");
-                    System.out.println("1. Add a new Product Information" + "                                       " + "Total number of Products " + shopService.getNumberOfProducts(getInstance()));
-                    System.out.println("2. Get the description of  products  " + "                                  " + "Number of Furnitures : " + shopService.getNumberOfFurnitures(getInstance()));
-                    System.out.println("3. Delete a product  " + "                                                  " + "Number of Lightings : " + shopService.getNumberOfLightings(getInstance()));
-                    System.out.println("4. Search products by price range " + "                                     " + "Number of SmartHomes : " + shopService.getNumberOfSmartHomes(getInstance()));
+//                    System.out.println("1. Add a new Product Information" + "                                       " + "Total number of Products " + shopService.getNumberOfProducts(getInstance()));
+                    System.out.println("1. Add a new Product Information" + "                                       " + "Total number of Products " + productRepository.getInstance().getNumberOfProductsDB());
+                    System.out.println("2. Get the description of  products  " + "                                  " + "Number of Furnitures : " + furnitureRepository.getInstance().getNumberOfFurnitureDB());
+                    System.out.println("3. Delete a product  " + "                                                  " + "Number of Lightings : " + lightingRepository.getInstance().getNumberOfLightingDB());
+                    System.out.println("4. Search products by price range " + "                                     " + "Number of SmartHomes : " + smarthomeRepository.getInstance().getNumberOfSmartHomeDB());
                     System.out.println("5. Sort the products by price ");
                     System.out.println("6. Go back to main menu ");
                     input = (scanner.nextLine());
@@ -341,6 +342,8 @@ public class Shop {
                                 Furniture added_furniture = productService.buildFurniture(name, price, stock, material, height, width);
                                 shopService.addProduct(getInstance(), added_furniture);
                                 shopService.addFurniture(getInstance(), added_furniture);
+                                productRepository.getInstance().addProductDB(added_furniture);
+                                furnitureRepository.getInstance().addfurnitureDB(added_furniture);
                                 break;
                             case "2":
                                 System.out.println("Name:");
@@ -385,6 +388,8 @@ public class Shop {
                                 Lighting added_lighting = productService.buildLighting(name, price, stock, power, type);
                                 shopService.addProduct(getInstance(), added_lighting);
                                 shopService.addLighting(getInstance(), added_lighting);
+                                productRepository.getInstance().addProductDB(added_lighting);
+                                lightingRepository.getInstance().addlightingDB(added_lighting);
                                 break;
                             case "3":
                                 System.out.println("Name:");
@@ -420,6 +425,8 @@ public class Shop {
                                 SmartHome added_smarthome = productService.buildSmartHome(name, price, stock, category, appname);
                                 shopService.addProduct(getInstance(), added_smarthome);
                                 shopService.addSmartHome(getInstance(), added_smarthome);
+                                productRepository.getInstance().addProductDB(added_smarthome);
+                                smarthomeRepository.getInstance().addsmarthomeDB(added_smarthome);
                                 break;
                         }
                     }
@@ -434,16 +441,20 @@ public class Shop {
 
                             switch (input_afis) {
                                 case "1":
-                                    shopService.printProductsDetails(getInstance());
+                                    //shopService.printProductsDetails(getInstance());
+                                    productRepository.getInstance().printAllProductsDB();
                                     break;
                                 case "2":
-                                    shopService.printFurnituresDetails(getInstance());
+                                    //shopService.printFurnituresDetails(getInstance());
+                                    furnitureRepository.getInstance().printAllFurnitureDB();
                                     break;
                                 case "3":
-                                    shopService.printLightingsDetails(getInstance());
+                                    //shopService.printLightingsDetails(getInstance());
+                                    lightingRepository.getInstance().printAllLightingDB();
                                     break;
                                 case "4":
-                                    shopService.printSmartHomesDetails(getInstance());
+                                    //shopService.printSmartHomesDetails(getInstance());
+                                    smarthomeRepository.getInstance().printAllSmartHomeDB();
                                     break;
                                 default:
                                     System.out.println("Invalid input. Please enter a valid option.");
@@ -465,47 +476,65 @@ public class Shop {
                         while (true) {
                             switch (product_type) {
                                 case "1":
-                                    shopService.printFurnituresDetails(getInstance());
+                                    //shopService.printFurnituresDetails(getInstance());
+                                    furnitureRepository.getInstance().printAllFurnitureDB();
                                     System.out.print("Enter the ID of the furniture you want to remove: ");
                                     long furnitureId = scanner.nextLong();
                                     scanner.nextLine();
 
 
-                                    if (!shopService.isValidProductId(getInstance(), furnitureId, "1")) {
-                                        System.out.println("Invalid ID entered. Please try again.");
-                                        continue;
-                                    }
+//                                    if (!shopService.isValidProductId(getInstance(), furnitureId, "1")) {
+//                                        System.out.println("Invalid ID entered. Please try again.");
+//                                        continue;
+//                                    }
+                                    if (!productRepository.getInstance().isValidProductIdDB(furnitureId, "1")) {
+                                       System.out.println("Invalid ID entered. Please try again.");
+                                       continue;
+                                   }
 
-                                    shopService.removeFurniture(getInstance(), furnitureId);
-                                    shopService.removeProduct(getInstance(), furnitureId);
+                                    //shopService.removeFurniture(getInstance(), furnitureId);
+                                   // shopService.removeProduct(getInstance(), furnitureId);
+                                    furnitureRepository.getInstance().deleteFurnitureByIdDB(furnitureId);
+                                    productRepository.getInstance().deleteProductByIdDB(furnitureId);
                                     break;
                                 case "2":
-                                    shopService.printLightingsDetails(getInstance());
+                                    //shopService.printLightingsDetails(getInstance());
+                                    lightingRepository.getInstance().printAllLightingDB();
                                     System.out.print("Enter the ID of the Lighting you want to remove: ");
                                     long lightingId = scanner.nextLong();
                                     scanner.nextLine();
 
-                                    if (!shopService.isValidProductId(getInstance(), lightingId, "2")) {
+                                    if (!productRepository.getInstance().isValidProductIdDB(lightingId, "2")) {
                                         System.out.println("Invalid ID entered. Please try again.");
                                         continue;
                                     }
 
-                                    shopService.removeLighting(getInstance(), lightingId);
-                                    shopService.removeProduct(getInstance(), lightingId);
+//                                    shopService.removeLighting(getInstance(), lightingId);
+//                                    shopService.removeProduct(getInstance(), lightingId);
+                                    productRepository.getInstance().deleteProductByIdDB(lightingId);
+                                    lightingRepository.getInstance().deleteLightingByIdDB(lightingId);
                                     break;
                                 case "3":
-                                    shopService.printSmartHomesDetails(getInstance());
+                                    //shopService.printSmartHomesDetails(getInstance());
+                                    smarthomeRepository.getInstance().printAllSmartHomeDB();
                                     System.out.print("Enter the ID of the SmartHome you want to remove: ");
                                     long smarthomeId = scanner.nextLong();
                                     scanner.nextLine();
 
-                                    if (!shopService.isValidProductId(getInstance(), smarthomeId, "3")) {
+//                                    if (!shopService.isValidProductId(getInstance(), smarthomeId, "3")) {
+//                                        System.out.println("Invalid ID entered. Please try again.");
+//                                        continue;
+//                                    }
+                                    if (!productRepository.getInstance().isValidProductIdDB(smarthomeId, "3")) {
                                         System.out.println("Invalid ID entered. Please try again.");
                                         continue;
                                     }
 
-                                    shopService.removeSmartHome(getInstance(), smarthomeId);
-                                    shopService.removeProduct(getInstance(), smarthomeId);
+//                                    shopService.removeSmartHome(getInstance(), smarthomeId);
+//                                    shopService.removeProduct(getInstance(), smarthomeId);
+
+                                    smarthomeRepository.getInstance().deleteSmarthomeByIdDB(smarthomeId);
+                                    productRepository.getInstance().deleteProductByIdDB(smarthomeId);
                                     break;
                                 default:
                                     continue;
@@ -540,12 +569,14 @@ public class Shop {
                         }
 
 
-                        shopService.printProductsDetailsByRange(getInstance(), min, max);
+                        //shopService.printProductsDetailsByRange(getInstance(), min, max);
+                        productRepository.getInstance().printProductsDetailsByRangeDB(min,max);
 
                     }
 
                     if (input.equals("5")) {
-                        shopService.printProductsDetailsSorted(getInstance());
+                        //shopService.printProductsDetailsSorted(getInstance());
+                        productRepository.getInstance().printProductsDetailsSortedDB();
                     }
                 } while (!input.equals("6"));
 
@@ -600,6 +631,8 @@ public class Shop {
                                 Delivery added_delivery = actionService.buildDelivery(name, price, vehicle_brand, vehicle_type);
                                 shopService.addDelivery(getInstance(), added_delivery);
                                 shopService.addAction(getInstance(), added_delivery);
+                                deliveryRepository.getInstance().addDeliveryDB(added_delivery);
+                                actionRepository.getInstance().addActionDB(added_delivery);
                                 break;
                             case "2":
                                 System.out.println("Name:");
@@ -622,6 +655,7 @@ public class Shop {
                                 Measuring added_measuring = actionService.buildMeasuring(name, price, category);
                                 shopService.addAction(getInstance(), added_measuring);
                                 actionRepository.getInstance().addActionDB(added_measuring);
+                                measuringRepository.getInstance().addMeasuringDB(added_measuring);
                                 shopService.addMeasuring(getInstance(), added_measuring);
                                 break;
 
@@ -665,6 +699,8 @@ public class Shop {
                                 Assembly added_assembly = actionService.buildAssembly(name, price, nr_of_prod, nr_of_emp);
                                 shopService.addAction(getInstance(), added_assembly);
                                 shopService.addAssembly(getInstance(), added_assembly);
+                                actionRepository.getInstance().addActionDB(added_assembly);
+                                assemblyRepository.getInstance().addAssemblyDB(added_assembly);
                                 break;
                         }
                     } else if (input2.equals("2")) {
@@ -676,16 +712,20 @@ public class Shop {
                         String input_afis = scanner.nextLine();
                         switch (input_afis) {
                             case "1":
-                                shopService.printActionsDetails(getInstance());
+                                //shopService.printActionsDetails(getInstance());
+                                actionRepository.getInstance().printAllActionsDB();
                                 break;
                             case "2":
-                                shopService.printDeliveryDetails(getInstance());
+                                //shopService.printDeliveryDetails(getInstance());
+                                deliveryRepository.getInstance().printAllDeliveriesDB();
                                 break;
                             case "3":
-                                shopService.printMeasuringDetails(getInstance());
+                                //shopService.printMeasuringDetails(getInstance());
+                                measuringRepository.getInstance().printAllMeasuringDB();
                                 break;
                             case "4":
-                                shopService.printAssemblyDetails(getInstance());
+                                //shopService.printAssemblyDetails(getInstance());
+                                assemblyRepository.getInstance().printAllAssembliesDB();
                                 break;
                         }
 

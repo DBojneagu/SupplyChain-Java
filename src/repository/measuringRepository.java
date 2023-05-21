@@ -47,6 +47,30 @@ public class measuringRepository {
         }
     }
 
+    public void printAllMeasuringDB() {
+        String sql = "SELECT * FROM measuring";
+
+        try {
+            Connection connection = DatabaseConnection.getInstance();
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(sql);
+
+            while (resultSet.next()) {
+                long id = resultSet.getLong("id");
+                String name = resultSet.getString("name");
+                double price = resultSet.getDouble("price");
+                String category = resultSet.getString("category");
+
+                System.out.println("ID: " + id + ", Name: " + name + ", Price: " + price +
+                        ", Category: " + category);
+            }
+
+            resultSet.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
 
 

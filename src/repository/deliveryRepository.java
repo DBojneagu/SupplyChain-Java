@@ -37,30 +37,7 @@ public class deliveryRepository {
             }
         }
 
-//        public void printAllDeliveries() {
-//            String sql = "SELECT * FROM delivery";
-//
-//            try {
-//                Connection connection = DatabaseConnection.getInstance();
-//                Statement statement = connection.createStatement();
-//                ResultSet resultSet = statement.executeQuery(sql);
-//
-//                while (resultSet.next()) {
-//                    long id = resultSet.getLong("id");
-//                    String name = resultSet.getString("name");
-//                    double price = resultSet.getDouble("price");
-//                    String vehicleBrand = resultSet.getString("vehicle_brand");
-//                    String vehicleType = resultSet.getString("vehicle_type");
-//
-//                    System.out.println("ID: " + id + ", Name: " + name + ", Price: " + price +
-//                            ", Vehicle Brand: " + vehicleBrand + ", Vehicle Type: " + vehicleType);
-//                }
-//
-//                resultSet.close();
-//            } catch (SQLException e) {
-//                e.printStackTrace();
-//            }
-//        }
+
     public void deleteAllDeliveriesDB() {
         String sql = "DELETE FROM delivery";
 
@@ -68,6 +45,30 @@ public class deliveryRepository {
             Connection connection = DatabaseConnection.getInstance();
             Statement statement = connection.createStatement();
             statement.executeUpdate(sql);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    public void printAllDeliveriesDB() {
+        String sql = "SELECT * FROM delivery";
+
+        try {
+            Connection connection = DatabaseConnection.getInstance();
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(sql);
+
+            while (resultSet.next()) {
+                long id = resultSet.getLong("id");
+                String name = resultSet.getString("name");
+                double price = resultSet.getDouble("price");
+                String vehicleBrand = resultSet.getString("vehicle_brand");
+                String vehicleType = resultSet.getString("vehicle_type");
+
+                System.out.println("ID: " + id + ", Name: " + name + ", Price: " + price +
+                        ", Vehicle Brand: " + vehicleBrand + ", Vehicle Type: " + vehicleType);
+            }
+
+            resultSet.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }

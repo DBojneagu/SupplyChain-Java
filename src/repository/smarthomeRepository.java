@@ -48,6 +48,64 @@ public class smarthomeRepository {
             e.printStackTrace();
         }
     }
+    public void printAllSmartHomeDB() {
+        String sql = "SELECT * FROM smarthome";
+
+        try {
+            Connection connection = DatabaseConnection.getInstance();
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(sql);
+
+            while (resultSet.next()) {
+                long id = resultSet.getLong("id");
+                String name = resultSet.getString("name");
+                double price = resultSet.getDouble("price");
+                int stock = resultSet.getInt("stock");
+                String category = resultSet.getString("category");
+                String appName = resultSet.getString("app_name");
+
+                System.out.println("ID: " + id + ", Name: " + name + ", Price: " + price +
+                        ", Stock: " + stock + ", Category: " + category + ", App Name: " + appName);
+            }
+
+            resultSet.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    public void deleteSmarthomeByIdDB(long id) {
+        String sql = "DELETE FROM smarthome WHERE id = ?";
+
+        try {
+            Connection connection = DatabaseConnection.getInstance();
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setLong(1, id);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    public int getNumberOfSmartHomeDB() {
+        String sql = "SELECT COUNT(*) FROM smarthome";
+        int numberOfProducts = 0;
+
+        try {
+            Connection connection = DatabaseConnection.getInstance();
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(sql);
+
+            if (resultSet.next()) {
+                numberOfProducts = resultSet.getInt(1);
+            }
+
+            resultSet.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return numberOfProducts;
+    }
+
 
 }
 

@@ -48,6 +48,31 @@ public class assemblyRepository {
         }
     }
 
+    public void printAllAssembliesDB() {
+        String sql = "SELECT * FROM assembly";
+
+        try {
+            Connection connection = DatabaseConnection.getInstance();
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(sql);
+
+            while (resultSet.next()) {
+                long id = resultSet.getLong("id");
+                String name = resultSet.getString("name");
+                double price = resultSet.getDouble("price");
+                int numberOfProducts = resultSet.getInt("number_of_products");
+                int numberOfEmployees = resultSet.getInt("number_of_employees");
+
+                System.out.println("ID: " + id + ", Name: " + name + ", Price: " + price +
+                        ", Number of Products: " + numberOfProducts + ", Number of Employees: " + numberOfEmployees);
+            }
+
+            resultSet.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
 
 
