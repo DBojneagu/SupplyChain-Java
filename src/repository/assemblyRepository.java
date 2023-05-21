@@ -73,6 +73,40 @@ public class assemblyRepository {
         }
     }
 
+    public int getNumberOfAssemblyDB() {
+        String sql = "SELECT COUNT(*) FROM assembly";
+        int numberOfAssembly = 0;
+
+        try {
+            Connection connection = DatabaseConnection.getInstance();
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(sql);
+
+            if (resultSet.next()) {
+                numberOfAssembly = resultSet.getInt(1);
+            }
+
+            resultSet.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return numberOfAssembly;
+    }
+
+    public void deleteAssemblyByIdDB(long id) {
+        String sql = "DELETE FROM assembly WHERE id = ?";
+
+        try {
+            Connection connection = DatabaseConnection.getInstance();
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setLong(1, id);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
 
 

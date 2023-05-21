@@ -74,6 +74,40 @@ public class deliveryRepository {
         }
     }
 
+    public int getNumberOfDeliveryDB() {
+        String sql = "SELECT COUNT(*) FROM delivery";
+        int numberOfDelivery = 0;
+
+        try {
+            Connection connection = DatabaseConnection.getInstance();
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(sql);
+
+            if (resultSet.next()) {
+                numberOfDelivery = resultSet.getInt(1);
+            }
+
+            resultSet.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return numberOfDelivery;
+    }
+
+    public void deleteDeliveryByIdDB(long id) {
+        String sql = "DELETE FROM delivery WHERE id = ?";
+
+        try {
+            Connection connection = DatabaseConnection.getInstance();
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setLong(1, id);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
 
 

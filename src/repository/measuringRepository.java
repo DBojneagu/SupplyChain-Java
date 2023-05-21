@@ -71,6 +71,39 @@ public class measuringRepository {
         }
     }
 
+    public int getNumberOfMeasuringDB() {
+        String sql = "SELECT COUNT(*) FROM measuring";
+        int numberOfMeasuring = 0;
+
+        try {
+            Connection connection = DatabaseConnection.getInstance();
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(sql);
+
+            if (resultSet.next()) {
+                numberOfMeasuring = resultSet.getInt(1);
+            }
+
+            resultSet.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return numberOfMeasuring;
+    }
+    public void deleteMeasuringByIdDB(long id) {
+        String sql = "DELETE FROM measuring WHERE id = ?";
+
+        try {
+            Connection connection = DatabaseConnection.getInstance();
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setLong(1, id);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
 
 

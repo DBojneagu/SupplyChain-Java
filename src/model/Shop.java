@@ -584,10 +584,10 @@ public class Shop {
 
                 do {
                     System.out.println("Ikea Menu");
-                    System.out.println("1. Add a new Action" + "                                                " + "Total number of Actions " + shopService.getNumberOfActions(getInstance()));
-                    System.out.println("2. Get all the actions available " + "                                  " + "Number of Deliveries : " + shopService.getNumberOfDeliveries(getInstance()));
-                    System.out.println("3. Delete an existing action " + "                                      " + "Number of Measurings : " + shopService.getNumberOfMeasurings(getInstance()));
-                    System.out.println("4. Go back to main menu " + "                                           " + "Number of Assemblies : " + shopService.getNumberOfAssembly(getInstance()));
+                    System.out.println("1. Add a new Action" + "                                                " + "Total number of Actions " + actionRepository.getInstance().getNumberOfActionsDB());
+                    System.out.println("2. Get all the actions available " + "                                  " + "Number of Deliveries : " + deliveryRepository.getInstance().getNumberOfDeliveryDB());
+                    System.out.println("3. Delete an existing action " + "                                      " + "Number of Measurings : " + measuringRepository.getInstance().getNumberOfMeasuringDB());
+                    System.out.println("4. Go back to main menu " + "                                           " + "Number of Assemblies : " + assemblyRepository.getInstance().getNumberOfAssemblyDB());
                     input2 = scanner.nextLine();
 
                     while (!input2.equals("1") && !input2.equals("2") && !input2.equals("3") && !input2.equals("4")) {
@@ -743,40 +743,53 @@ public class Shop {
                         while (true) {
                             switch (action_type) {
                                 case "1":
-                                    shopService.printDeliveryDetails(getInstance());
+                                    //shopService.printDeliveryDetails(getInstance());
+                                    deliveryRepository.getInstance().printAllDeliveriesDB();
                                     System.out.print("Enter the ID of the delivery you want to remove: ");
                                     long deliveryId = scanner.nextLong();
-                                    if (!shopService.isValidActionId(getInstance(), deliveryId, "1")) {
+//                                    if (!shopService.isValidActionId(getInstance(), deliveryId, "1")) {
+//                                        System.out.println("Invalid ID entered. Please try again.");
+//                                        continue;
+//                                    }
+                                    if (!actionRepository.getInstance().isValidActionIdDB(deliveryId,"1")) {
                                         System.out.println("Invalid ID entered. Please try again.");
                                         continue;
                                     }
                                     scanner.nextLine();
-                                    shopService.removeDelivery(getInstance(), deliveryId);
-                                    shopService.removeAction(getInstance(), deliveryId);
+//                                    shopService.removeDelivery(getInstance(), deliveryId);
+//                                    shopService.removeAction(getInstance(), deliveryId);
+                                    deliveryRepository.getInstance().deleteDeliveryByIdDB(deliveryId);
+                                    actionRepository.getInstance().deleteActionByIdDB(deliveryId);
                                     break;
                                 case "2":
-                                    shopService.printMeasuringDetails(getInstance());
+                                    //shopService.printMeasuringDetails(getInstance());
+                                    measuringRepository.getInstance().printAllMeasuringDB();
                                     System.out.print("Enter the ID of the measuring you want to remove: ");
                                     long measuringId = scanner.nextLong();
-                                    if (!shopService.isValidActionId(getInstance(), measuringId, "2")) {
+                                    if (!actionRepository.getInstance().isValidActionIdDB(measuringId,"2")) {
                                         System.out.println("Invalid ID entered. Please try again.");
                                         continue;
                                     }
-                                    shopService.removeMeasuring(getInstance(), measuringId);
-                                    shopService.removeAction(getInstance(), measuringId);
+//                                    shopService.removeMeasuring(getInstance(), measuringId);
+//                                    shopService.removeAction(getInstance(), measuringId);
+                                    measuringRepository.getInstance().deleteMeasuringByIdDB(measuringId);
+                                    actionRepository.getInstance().deleteActionByIdDB(measuringId);
                                     break;
                                 case "3":
-                                    shopService.printAssemblyDetails(getInstance());
+//                                    shopService.printAssemblyDetails(getInstance());
+                                    assemblyRepository.getInstance().printAllAssembliesDB();
                                     System.out.print("Enter the ID of the assembly you want to remove: ");
                                     long assemblyId = scanner.nextLong();
 
-                                    if (!shopService.isValidActionId(getInstance(), assemblyId, "3")) {
+                                    if (!actionRepository.getInstance().isValidActionIdDB(assemblyId,"3")) {
                                         System.out.println("Invalid ID entered. Please try again.");
                                         continue;
                                     }
                                     scanner.nextLine();
-                                    shopService.removeAssembly(getInstance(), assemblyId);
-                                    shopService.removeAction(getInstance(), assemblyId);
+//                                    shopService.removeAssembly(getInstance(), assemblyId);
+//                                    shopService.removeAction(getInstance(), assemblyId);
+                                    assemblyRepository.getInstance().deleteAssemblyByIdDB(assemblyId);
+                                    actionRepository.getInstance().deleteActionByIdDB(assemblyId);
                                     break;
                                 default:
                                     break;
@@ -793,7 +806,7 @@ public class Shop {
         String input_orders;
         do {
             System.out.println("Ikea Menu");
-            System.out.println("1. Add a new Order " + "                                                " + "Total number of Orders " + shopService.getNumberOfOrders(getInstance()));
+            System.out.println("1. Add a new Order " + "                                                " + "Total number of Orders " + ordersRepository.getInstance().getNumberOfOrdersDB());
             System.out.println("2. See all orders ");
             System.out.println("3. Delete an order ");
             System.out.println("4. Go back to main menu ");
@@ -805,53 +818,152 @@ public class Shop {
                 int product_id = 0;
 
                 while (!validProductId) {
-                    System.out.println("Please select a product wanted: ");
-                    shopService.printProductsDetails(getInstance());
-                    System.out.println("The id of the product");
-                    product_id = scanner.nextInt();
+                    System.out.println("Please select what type of product you want: ");
 
-                    if (!shopService.isValidProductOnlyId(getInstance(), product_id)) {
-                        System.out.println("Invalid ID entered. Please try again.");
-                    } else {
-                        validProductId = true;
+                    System.out.println("1. Furniture ");
+                    System.out.println("2. Lighting ");
+                    System.out.println("3. Smarthome ");
+                    String input_product_type;
+                    input_product_type = (scanner.nextLine());
+
+                    if (input_product_type.equals("1")) {
+                        while (!validProductId) {
+                            furnitureRepository.getInstance().printAllFurnitureDB();
+                            System.out.println("The id of the furniture");
+                            String product_id_input = scanner.nextLine();
+
+                            try {
+                                product_id = Integer.parseInt(product_id_input);
+                                if (!productRepository.getInstance().isValidProductIdDB(product_id, "1")) {
+                                    System.out.println("Invalid ID entered. Please try again.");
+                                } else {
+                                    validProductId = true;
+                                }
+                            } catch (NumberFormatException e) {
+                                System.out.println("Invalid ID format. Please enter a valid integer ID.");
+                            }
+                        }
                     }
-                    scanner.nextLine();
+                    else if (input_product_type.equals("2")) {
+                        while (!validProductId) {
+                            lightingRepository.getInstance().printAllLightingDB();
+                            System.out.println("The id of the lighting");
+                            String product_id_input = scanner.nextLine();
+                            try {
+                                product_id = Integer.parseInt(product_id_input);
+                                if (!productRepository.getInstance().isValidProductIdDB(product_id, "2")) {
+                                    System.out.println("Invalid ID entered. Please try again.");
+                                    System.out.println(product_id);
+                                } else {
+                                    validProductId = true;
+                                }
+                            } catch (NumberFormatException e) {
+                                System.out.println("Invalid ID format. Please enter a valid integer ID.");
+                            }
+                        }
+                    }
+                    else if (input_product_type.equals("3")) {
+                        while (!validProductId) {
+                            smarthomeRepository.getInstance().printAllSmartHomeDB();
+                            System.out.println("The id of the SmartHome");
+                            String product_id_input = scanner.nextLine();
+
+                            try {
+                                product_id = Integer.parseInt(product_id_input);
+                                if (!productRepository.getInstance().isValidProductIdDB(product_id, "3")) {
+                                    System.out.println("Invalid ID entered. Please try again.");
+                                } else {
+                                    validProductId = true;
+                                }
+                            } catch (NumberFormatException e) {
+                                System.out.println("Invalid ID format. Please enter a valid integer ID.");
+                            }
+                        }
+                    }
                 }
 
                 boolean validActionId = false;
                 int action_id = 0;
 
                 while (!validActionId) {
-                    System.out.println("Please  the action wanted: ");
-                    shopService.printActionsDetails(getInstance());
-                    System.out.println("The id of the action");
-                    action_id = scanner.nextInt();
+                    System.out.println("Please select what type of action you want: ");
 
-                    if (!shopService.isValidActionOnlyId(getInstance(), action_id)) {
-                        System.out.println("Invalid ID entered. Please try again.");
-                    } else {
-                        validActionId = true;
+                    System.out.println("1. Delivery ");
+                    System.out.println("2. Measuring ");
+                    System.out.println("3. Assembly ");
+                    String input_action_type;
+                    input_action_type = (scanner.nextLine());
+
+                    if (input_action_type.equals("1")) {
+                        while (!validActionId) {
+                            deliveryRepository.getInstance().printAllDeliveriesDB();
+                            System.out.println("The id of the delivery service ");
+                            String action_id_input = scanner.nextLine();
+
+                            try {
+                                action_id = Integer.parseInt(action_id_input);
+                                if (!actionRepository.getInstance().isValidActionIdDB(action_id, "1")) {
+                                    System.out.println("Invalid ID entered. Please try again.");
+                                } else {
+                                    validActionId = true;
+                                }
+                            } catch (NumberFormatException e) {
+                                System.out.println("Invalid ID format. Please enter a valid integer ID.");
+                            }
+                        }
+                    } else if (input_action_type.equals("2")) {
+                        while (!validActionId) {
+                            measuringRepository.getInstance().printAllMeasuringDB();
+                            System.out.println("The id of the measuring service ");
+                            String action_id_input = scanner.nextLine();
+
+                            try {
+                                action_id = Integer.parseInt(action_id_input);
+                                if (!actionRepository.getInstance().isValidActionIdDB(action_id, "2")) {
+                                    System.out.println("Invalid ID entered. Please try again.");
+                                } else {
+                                    validActionId = true;
+                                }
+                            } catch (NumberFormatException e) {
+                                System.out.println("Invalid ID format. Please enter a valid integer ID.");
+                            }
+                        }
+                    } else if (input_action_type.equals("3")) {
+                        while (!validActionId) {
+                            assemblyRepository.getInstance().printAllAssembliesDB();
+                            System.out.println("The id of the assembly service ");
+                            String action_id_input = scanner.nextLine();
+
+                            try {
+                                action_id = Integer.parseInt(action_id_input);
+                                if (!actionRepository.getInstance().isValidActionIdDB(action_id, "3")) {
+                                    System.out.println("Invalid ID entered. Please try again.");
+                                } else {
+                                    validActionId = true;
+                                }
+                            } catch (NumberFormatException e) {
+                                System.out.println("Invalid ID format. Please enter a valid integer ID.");
+                            }
+                        }
                     }
-                    scanner.nextLine();
-                }
 
-                Order added_order = orderService.buildOrder(shopService.getActionById(getInstance(), action_id), shopService.getProductById(getInstance(), product_id));
-                shopService.addOrder(getInstance(), added_order);
+                    Order added_order = orderService.buildOrder(actionRepository.getInstance().getActionById(action_id), productRepository.getInstance().getProductById(product_id));
+                    ordersRepository.getInstance().addordersDB(added_order);
+                }
             } else if (input_orders.equals("2")) {
-                shopService.printOrdersDetails(getInstance());
+                ordersRepository.getInstance().printAllOrdersDB();
             } else if (input_orders.equals("3")) {
-                shopService.printOrdersDetails(getInstance());
+                ordersRepository.getInstance().printAllOrdersDB();
 
                 while (true) {
                     System.out.print("Enter the ID of the order you want to remove: ");
                     long orderId = scanner.nextLong();
                     scanner.nextLine();
-                    if (!shopService.isValidOrder(getInstance(), orderId)) {
+                    if (!ordersRepository.getInstance().isValidOrderIdDB(orderId)) {
                         System.out.println("Invalid ID entered. Please try again.");
                         continue;
                     }
-
-                    shopService.removeOrders(getInstance(), orderId);
+                    ordersRepository.getInstance().deleteOrderByIdDB(orderId);
                     break;
                 }
             }

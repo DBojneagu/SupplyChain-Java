@@ -75,7 +75,7 @@ public class productRepository {
 
             if (resultSet.next()) {
                 int count = resultSet.getInt(1);
-                return count > 0;
+                return count > 0; // Return true if the product ID exists in the specified product type table
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -83,6 +83,37 @@ public class productRepository {
 
         return false;
     }
+
+    public Product getProductById(long id) {
+
+
+        String sql = "SELECT * FROM product WHERE id = ?";
+
+        try {
+            Connection connection = DatabaseConnection.getInstance();
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setLong(1, id);
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                // Retrieve the product details from the result set
+                long productId = resultSet.getLong("id");
+                String name = resultSet.getString("name");
+                int price = resultSet.getInt("price");
+                int stock = resultSet.getInt("stock");
+
+                // Create an instance of the Product object with the retrieved details
+                Product product = new Product(productId, name, price, stock);
+
+                return product;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null; // Return null if no product with the given ID is found
+    }
+
 
     public int getNumberOfProductsDB() {
         String sql = "SELECT COUNT(*) FROM product";
