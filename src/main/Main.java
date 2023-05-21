@@ -10,6 +10,7 @@ public class Main {
         String input;
         Scanner scanner = new Scanner(System.in);
         do {
+           //deliveryRepository.getInstance().printAllDeliveries();
             System.out.println("Ikea Menu");
             System.out.println("1. Products Menu & Delivery Menu");
             System.out.println("2. Orders Menu");
@@ -33,6 +34,12 @@ public class Main {
         else if (input.equals("4")) {
                 actionRepository.getInstance().deleteAllActionsDB();
                 deliveryRepository.getInstance().deleteAllDeliveriesDB();
+                productRepository.getInstance().deleteAllProdcutsDB();
+                assemblyRepository.getInstance().deleteAllAssembliesDB();
+                measuringRepository.getInstance().deleteAllMeasuringsDB();
+                furnitureRepository.getInstance().deleteAllFurnitureDB();
+                lightingRepository.getInstance().deleteAllLighting();
+                smarthomeRepository.getInstance().deleteAllsmarthome();
             }
         } while (!input.equals("5"));
     }

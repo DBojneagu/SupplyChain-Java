@@ -1,0 +1,62 @@
+DROP TABLE IF EXISTS  orders, delivery, assembly, lighting, furniture, smarthome, measuring, action, product;CREATE TABLE product (
+  id BIGINT PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  price INT NOT NULL,
+  stock INT NOT NULL
+);
+CREATE TABLE lighting (
+  id BIGINT PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  stock INT NOT NULL,
+  price INT NOT NULL,
+  power INT NOT NULL,
+  type VARCHAR(255) NOT NULL
+);
+CREATE TABLE furniture (
+  id BIGINT PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  price INT NOT NULL,
+  stock INT NOT NULL,
+  material VARCHAR(255) NOT NULL,
+  height DOUBLE NOT NULL,
+  width DOUBLE NOT NULL
+);
+CREATE TABLE smarthome (
+  id BIGINT PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  stock INT NOT NULL,
+  price INT NOT NULL,
+  category VARCHAR(255) NOT NULL,
+  app_name VARCHAR(255) NOT NULL
+);CREATE TABLE action (
+  id BIGINT PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  price DOUBLE NOT NULL
+);
+CREATE TABLE measuring (
+  id BIGINT PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  price DOUBLE NOT NULL,
+  category VARCHAR(255) NOT NULL
+);
+CREATE TABLE assembly (
+  id BIGINT PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  price INT NOT NULL,
+  number_of_products INT NOT NULL,
+  number_of_employees INT NOT NULL
+);
+CREATE TABLE `delivery` (
+  `id` BIGINT PRIMARY KEY,
+  `name` VARCHAR(100),
+  `price` DOUBLE,
+  `vehicle_brand` VARCHAR(100),
+  `vehicle_type` VARCHAR(100)
+);CREATE TABLE orders (
+  id BIGINT PRIMARY KEY,
+  product_id BIGINT NOT NULL,
+  action_id BIGINT NOT NULL,
+  price DOUBLE NOT NULL,
+  FOREIGN KEY (product_id) REFERENCES product(id),
+  FOREIGN KEY (action_id) REFERENCES action(id)
+);

@@ -111,50 +111,74 @@ public class Shop {
         Furniture added_furniture = productService.buildFurniture("Scaun", 200, 100, "bumbac", 10, 10);
         shopService.addProduct(getInstance(), added_furniture);
         shopService.addFurniture(getInstance(), added_furniture);
+        productRepository.getInstance().addProductDB(added_furniture);
+        furnitureRepository.getInstance().addfurnitureDB(added_furniture);
 
         Furniture added_furniture2 = productService.buildFurniture("Canapea", 500, 60, "Piele Naturala", 200, 100);
         shopService.addProduct(getInstance(), added_furniture2);
         shopService.addFurniture(getInstance(), added_furniture2);
+        productRepository.getInstance().addProductDB(added_furniture2);
+        furnitureRepository.getInstance().addfurnitureDB(added_furniture2);
 
         Furniture added_furniture3 = productService.buildFurniture("Birou", 700, 250, "Stejar", 200, 160);
         shopService.addProduct(getInstance(), added_furniture3);
         shopService.addFurniture(getInstance(), added_furniture3);
+        productRepository.getInstance().addProductDB(added_furniture3);
+        furnitureRepository.getInstance().addfurnitureDB(added_furniture3);
 
         Furniture added_furniture4 = productService.buildFurniture("Noptiera", 50, 10, "Brad", 300, 450);
         shopService.addProduct(getInstance(), added_furniture4);
         shopService.addFurniture(getInstance(), added_furniture4);
+        productRepository.getInstance().addProductDB(added_furniture4);
+        furnitureRepository.getInstance().addfurnitureDB(added_furniture4);
 
         Furniture added_furniture5 = productService.buildFurniture("Fotoliu", 500, 150, "Piele", 400, 450);
         shopService.addProduct(getInstance(), added_furniture5);
         shopService.addFurniture(getInstance(), added_furniture5);
+        productRepository.getInstance().addProductDB(added_furniture5);
+        furnitureRepository.getInstance().addfurnitureDB(added_furniture5);
 
         Furniture added_furniture6 = productService.buildFurniture("Masa", 1000, 5, "Lemn", 500, 150);
         shopService.addProduct(getInstance(), added_furniture6);
         shopService.addFurniture(getInstance(), added_furniture6);
+        productRepository.getInstance().addProductDB(added_furniture6);
+        furnitureRepository.getInstance().addfurnitureDB(added_furniture6);
 
         Furniture added_furniture7 = productService.buildFurniture("Canapea", 3000, 1403, "Piele Intoarsa", 200, 350);
         shopService.addProduct(getInstance(), added_furniture7);
         shopService.addFurniture(getInstance(), added_furniture7);
+        productRepository.getInstance().addProductDB(added_furniture7);
+        furnitureRepository.getInstance().addfurnitureDB(added_furniture7);
 
         Furniture added_furniture8 = productService.buildFurniture("Scaun", 20, 110, "Lemn", 100, 150);
         shopService.addProduct(getInstance(), added_furniture8);
         shopService.addFurniture(getInstance(), added_furniture8);
+        productRepository.getInstance().addProductDB(added_furniture8);
+        furnitureRepository.getInstance().addfurnitureDB(added_furniture8);
 
         Lighting added_lighting1 = productService.buildLighting("Bec", 200, 100, 300, "electric");
         shopService.addProduct(getInstance(), added_lighting1);
         shopService.addLighting(getInstance(), added_lighting1);
+        productRepository.getInstance().addProductDB(added_lighting1);
+        lightingRepository.getInstance().addlightingDB(added_lighting1);
 
         Lighting added_lighting2 = productService.buildLighting("Lanterna", 500, 20, 30, "electric");
         shopService.addProduct(getInstance(), added_lighting2);
         shopService.addLighting(getInstance(), added_lighting2);
+        productRepository.getInstance().addProductDB(added_lighting2);
+        lightingRepository.getInstance().addlightingDB(added_lighting2);
 
         SmartHome added_smarthome1 = productService.buildSmartHome("Dumbell", 200, 100, "LifeStyle", "Stepper");
         shopService.addProduct(getInstance(), added_smarthome1);
         shopService.addSmartHome(getInstance(), added_smarthome1);
+        productRepository.getInstance().addProductDB(added_smarthome1);
+        smarthomeRepository.getInstance().addsmarthomeDB(added_smarthome1);
 
         SmartHome added_smarthome2 = productService.buildSmartHome("Treadmill", 1000, 100, "Fitness", "Now");
         shopService.addProduct(getInstance(), added_smarthome2);
         shopService.addSmartHome(getInstance(), added_smarthome2);
+        productRepository.getInstance().addProductDB(added_smarthome2);
+        smarthomeRepository.getInstance().addsmarthomeDB(added_smarthome2);
 
 
         Delivery added_delivery1 = actionService.buildDelivery("UPS", 200, "Mazda", "SUV");
@@ -185,30 +209,42 @@ public class Shop {
         Measuring added_measuring1 = actionService.buildMeasuring("Ikea_Measuring", 2000, "Outside");
         shopService.addAction(getInstance(), added_measuring1);
         shopService.addMeasuring(getInstance(), added_measuring1);
+        actionRepository.getInstance().addActionDB(added_measuring1);
+        measuringRepository.getInstance().addMeasuringDB(added_measuring1);
 
         Measuring added_measuring2 = actionService.buildMeasuring("Ikea_Measuring", 1000, "Inside");
         shopService.addAction(getInstance(), added_measuring2);
         shopService.addMeasuring(getInstance(), added_measuring2);
+        actionRepository.getInstance().addActionDB(added_measuring2);
+        measuringRepository.getInstance().addMeasuringDB(added_measuring2);
 
         Assembly added_assembly1 = actionService.buildAssembly("Jenga", 10000, 10, 20);
         shopService.addAction(getInstance(), added_assembly1);
         shopService.addAssembly(getInstance(), added_assembly1);
+        actionRepository.getInstance().addActionDB(added_assembly1);
+        assemblyRepository.getInstance().addAssemblyDB(added_assembly1);
 
         Assembly added_assembly2 = actionService.buildAssembly("Ikea_Assemblers", 20000, 12, 15);
         shopService.addAction(getInstance(), added_assembly2);
         shopService.addAssembly(getInstance(), added_assembly2);
+        actionRepository.getInstance().addActionDB(added_assembly2);
+        assemblyRepository.getInstance().addAssemblyDB(added_assembly2);
 
         Order added_order = orderService.buildOrder(added_assembly1, added_furniture3);
+        ordersRepository.getInstance().addordersDB(added_order);
         shopService.addOrder(getInstance(), added_order);
 
         Order added_order2 = orderService.buildOrder(added_assembly2, added_smarthome1);
         shopService.addOrder(getInstance(), added_order2);
+        ordersRepository.getInstance().addordersDB(added_order2);
 
         Order added_order3 = orderService.buildOrder(added_delivery1, added_lighting2);
         shopService.addOrder(getInstance(), added_order3);
+        ordersRepository.getInstance().addordersDB(added_order3);
 
         Order added_order4 = orderService.buildOrder(added_measuring1, added_furniture4);
         shopService.addOrder(getInstance(), added_order4);
+        ordersRepository.getInstance().addordersDB(added_order4);
     }
     public void menu_productsAndActions() {
         do {
