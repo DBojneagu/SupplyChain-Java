@@ -108,6 +108,25 @@ public class lightingRepository {
         return numberOfProducts;
     }
 
+    public void updateLightingByIdDB(long id, Lighting updatedLighting) {
+        String sql = "UPDATE lighting SET name = ?, price = ?, stock = ?, power = ?, type = ? WHERE id = ?";
+
+        try {
+            Connection connection = DatabaseConnection.getInstance();
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, updatedLighting.getName());
+            statement.setDouble(2, updatedLighting.getPrice());
+            statement.setInt(3, updatedLighting.getStock());
+            statement.setInt(4, updatedLighting.getPower());
+            statement.setString(5, updatedLighting.getType());
+            statement.setLong(6, id);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 
 }
 

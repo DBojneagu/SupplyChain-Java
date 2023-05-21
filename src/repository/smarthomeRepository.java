@@ -105,6 +105,24 @@ public class smarthomeRepository {
 
         return numberOfProducts;
     }
+    public void updateSmartHomeByIdDB(long id, SmartHome updatedSmartHome) {
+        String sql = "UPDATE smarthome SET name = ?, price = ?, stock = ?, category = ?, app_name = ? WHERE id = ?";
+
+        try {
+            Connection connection = DatabaseConnection.getInstance();
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, updatedSmartHome.getName());
+            statement.setDouble(2, updatedSmartHome.getPrice());
+            statement.setInt(3, updatedSmartHome.getStock());
+            statement.setString(4, updatedSmartHome.getCategory());
+            statement.setString(5, updatedSmartHome.getAppName());
+            statement.setLong(6, id);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 
 
 }

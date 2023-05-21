@@ -206,5 +206,20 @@ public class actionRepository {
             e.printStackTrace();
         }
     }
+    public void updateActionByIdDB(long id, Action updatedAction) {
+        String sql = "UPDATE action SET name = ?, price = ? WHERE id = ?";
+
+        try {
+            Connection connection = DatabaseConnection.getInstance();
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, updatedAction.getName());
+            statement.setDouble(2, updatedAction.getPrice());
+            statement.setLong(3, id);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 
 }

@@ -111,6 +111,25 @@ public class furnitureRepository {
             e.printStackTrace();
         }
     }
+    public void updateFurnitureByIdDB(long id, Furniture updatedFurniture) {
+        String sql = "UPDATE furniture SET name = ?, price = ?, stock = ?, material = ?, height = ?, width = ? WHERE id = ?";
+
+        try {
+            Connection connection = DatabaseConnection.getInstance();
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, updatedFurniture.getName());
+            statement.setDouble(2, updatedFurniture.getPrice());
+            statement.setInt(3, updatedFurniture.getStock());
+            statement.setString(4, updatedFurniture.getMaterial());
+            statement.setDouble(5, updatedFurniture.getHeight());
+            statement.setDouble(6, updatedFurniture.getWidth());
+            statement.setLong(7, id);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 
 }
 

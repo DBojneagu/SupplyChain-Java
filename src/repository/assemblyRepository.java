@@ -106,6 +106,23 @@ public class assemblyRepository {
             e.printStackTrace();
         }
     }
+    public void updateAssemblyByIdDB(long id, Assembly updatedAssembly) {
+        String sql = "UPDATE assembly SET name = ?, price = ?, number_of_products = ?, number_of_employees = ? WHERE id = ?";
+
+        try {
+            Connection connection = DatabaseConnection.getInstance();
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, updatedAssembly.getName());
+            statement.setDouble(2, updatedAssembly.getPrice());
+            statement.setInt(3, updatedAssembly.getNumber_of_products());
+            statement.setInt(4, updatedAssembly.getNumber_of_employees());
+            statement.setLong(5, id);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 
 }
 

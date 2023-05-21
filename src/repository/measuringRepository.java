@@ -103,6 +103,22 @@ public class measuringRepository {
             e.printStackTrace();
         }
     }
+    public void updateMeasuringByIdDB(long id, Measuring updatedMeasuring) {
+        String sql = "UPDATE measuring SET name = ?, price = ?, category = ? WHERE id = ?";
+
+        try {
+            Connection connection = DatabaseConnection.getInstance();
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, updatedMeasuring.getName());
+            statement.setDouble(2, updatedMeasuring.getPrice());
+            statement.setString(3, updatedMeasuring.getCategory());
+            statement.setLong(4, id);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 
 }
 

@@ -269,6 +269,23 @@ public class productRepository {
         }
     }
 
+    public void updateProductByIdDB(long id, Product updatedProduct) {
+        String sql = "UPDATE product SET name = ?, price = ?, stock = ? WHERE id = ?";
+
+        try {
+            Connection connection = DatabaseConnection.getInstance();
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, updatedProduct.getName());
+            statement.setDouble(2, updatedProduct.getPrice());
+            statement.setInt(3, updatedProduct.getStock());
+            statement.setLong(4, id);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 }
 
 

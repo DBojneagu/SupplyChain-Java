@@ -108,6 +108,24 @@ public class deliveryRepository {
         }
     }
 
+    public void updateDeliveryByIdDB(long id, Delivery updatedDelivery) {
+        String sql = "UPDATE delivery SET name = ?, price = ?, vehicle_brand = ?, vehicle_type = ? WHERE id = ?";
+
+        try {
+            Connection connection = DatabaseConnection.getInstance();
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, updatedDelivery.getName());
+            statement.setDouble(2, updatedDelivery.getPrice());
+            statement.setString(3, updatedDelivery.getVehicle_brand());
+            statement.setString(4, updatedDelivery.getVehicle_type());
+            statement.setLong(5, id);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 }
 
 
