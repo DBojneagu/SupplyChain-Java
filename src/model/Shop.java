@@ -487,7 +487,7 @@ public class Shop {
 //                                        System.out.println("Invalid ID entered. Please try again.");
 //                                        continue;
 //                                    }
-                                    if (!productRepository.getInstance().isValidProductIdDB(furnitureId, "1")) {
+                                    if (!productRepository.getInstance().isValidProductIdOrdersDB(furnitureId, "1")) {
                                        System.out.println("Invalid ID entered. Please try again.");
                                        continue;
                                    }
@@ -504,7 +504,7 @@ public class Shop {
                                     long lightingId = scanner.nextLong();
                                     scanner.nextLine();
 
-                                    if (!productRepository.getInstance().isValidProductIdDB(lightingId, "2")) {
+                                    if (!productRepository.getInstance().isValidProductIdOrdersDB(lightingId, "2")) {
                                         System.out.println("Invalid ID entered. Please try again.");
                                         continue;
                                     }
@@ -525,7 +525,7 @@ public class Shop {
 //                                        System.out.println("Invalid ID entered. Please try again.");
 //                                        continue;
 //                                    }
-                                    if (!productRepository.getInstance().isValidProductIdDB(smarthomeId, "3")) {
+                                    if (!productRepository.getInstance().isValidProductIdOrdersDB(smarthomeId, "3")) {
                                         System.out.println("Invalid ID entered. Please try again.");
                                         continue;
                                     }
@@ -751,7 +751,7 @@ public class Shop {
 //                                        System.out.println("Invalid ID entered. Please try again.");
 //                                        continue;
 //                                    }
-                                    if (!actionRepository.getInstance().isValidActionIdDB(deliveryId,"1")) {
+                                    if (!actionRepository.getInstance().isValidActionIdOrdersDB(deliveryId,"1")) {
                                         System.out.println("Invalid ID entered. Please try again.");
                                         continue;
                                     }
@@ -766,7 +766,7 @@ public class Shop {
                                     measuringRepository.getInstance().printAllMeasuringDB();
                                     System.out.print("Enter the ID of the measuring you want to remove: ");
                                     long measuringId = scanner.nextLong();
-                                    if (!actionRepository.getInstance().isValidActionIdDB(measuringId,"2")) {
+                                    if (!actionRepository.getInstance().isValidActionIdOrdersDB(measuringId,"2")) {
                                         System.out.println("Invalid ID entered. Please try again.");
                                         continue;
                                     }
@@ -781,7 +781,7 @@ public class Shop {
                                     System.out.print("Enter the ID of the assembly you want to remove: ");
                                     long assemblyId = scanner.nextLong();
 
-                                    if (!actionRepository.getInstance().isValidActionIdDB(assemblyId,"3")) {
+                                    if (!actionRepository.getInstance().isValidActionIdOrdersDB(assemblyId,"3")) {
                                         System.out.println("Invalid ID entered. Please try again.");
                                         continue;
                                     }

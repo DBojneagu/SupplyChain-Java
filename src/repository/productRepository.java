@@ -114,6 +114,43 @@ public class productRepository {
         return null; // Return null if no product with the given ID is found
     }
 
+    public boolean isValidProductIdOrdersDB(long id, String productType) {
+        String tableName = getTableNameByProductType(productType);
+        if (tableName == null) {
+            return false;
+        }
+
+        String sql = "SELECT COUNT(*) FROM " + tableName + " WHERE id = ?";
+        String ordersSql = "SELECT COUNT(*) FROM orders WHERE product_id = ?";
+
+        try {
+            Connection connection = DatabaseConnection.getInstance();
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setLong(1, id);
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                int count = resultSet.getInt(1);
+                if (count > 0) {
+                    // Check if the product ID exists in the orders table
+                    PreparedStatement ordersStatement = connection.prepareStatement(ordersSql);
+                    ordersStatement.setLong(1, id);
+                    ResultSet ordersResultSet = ordersStatement.executeQuery();
+
+                    if (ordersResultSet.next()) {
+                        int ordersCount = ordersResultSet.getInt(1);
+                        return ordersCount == 0; // Return true if the product ID is not in the orders table
+                    }
+
+                    ordersResultSet.close();
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
 
     public int getNumberOfProductsDB() {
         String sql = "SELECT COUNT(*) FROM product";
