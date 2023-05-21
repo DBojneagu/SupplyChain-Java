@@ -1,4 +1,5 @@
 package model;
+import repository.*;
 import service.ProductService;
 import service.ShopService;
 import service.*;
@@ -104,6 +105,7 @@ public class Shop {
     public void setSmartHomes(List < SmartHome > smartHomes) {
         this.smartHomes = smartHomes;
     }
+    actionRepository repositoryAction = new actionRepository();
 
     public void init() {
         Furniture added_furniture = productService.buildFurniture("Scaun", 200, 100, "bumbac", 10, 10);
@@ -156,19 +158,28 @@ public class Shop {
 
 
         Delivery added_delivery1 = actionService.buildDelivery("UPS", 200, "Mazda", "SUV");
+        actionRepository.getInstance().addActionDB(added_delivery1);
+        deliveryRepository.getInstance().addDeliveryDB(added_delivery1);
         shopService.addAction(getInstance(), added_delivery1);
+
         shopService.addDelivery(getInstance(), added_delivery1);
 
         Delivery added_delivery2 = actionService.buildDelivery("DHL", 500, "Ford", "Sedan");
+        actionRepository.getInstance().addActionDB(added_delivery2);
+        deliveryRepository.getInstance().addDeliveryDB(added_delivery2);
         shopService.addAction(getInstance(), added_delivery2);
         shopService.addDelivery(getInstance(), added_delivery2);
 
         Delivery added_delivery3 = actionService.buildDelivery("SameDay", 1000, "Dacia", "Van");
         shopService.addAction(getInstance(), added_delivery3);
+        actionRepository.getInstance().addActionDB(added_delivery3);
+        deliveryRepository.getInstance().addDeliveryDB(added_delivery3);
         shopService.addDelivery(getInstance(), added_delivery3);
 
         Delivery added_delivery4 = actionService.buildDelivery("Fan", 1000, "Renault", "Van");
         shopService.addAction(getInstance(), added_delivery4);
+        actionRepository.getInstance().addActionDB(added_delivery4);
+        deliveryRepository.getInstance().addDeliveryDB(added_delivery4);
         shopService.addDelivery(getInstance(), added_delivery4);
 
         Measuring added_measuring1 = actionService.buildMeasuring("Ikea_Measuring", 2000, "Outside");
@@ -574,6 +585,7 @@ public class Shop {
 
                                 Measuring added_measuring = actionService.buildMeasuring(name, price, category);
                                 shopService.addAction(getInstance(), added_measuring);
+                                actionRepository.getInstance().addActionDB(added_measuring);
                                 shopService.addMeasuring(getInstance(), added_measuring);
                                 break;
 

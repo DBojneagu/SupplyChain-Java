@@ -1,5 +1,5 @@
 package service;
-
+import repository.*;
 import model.*;
 import java.util.*;
 
@@ -9,6 +9,7 @@ public class ShopService {
         shop.getProducts().add(product);
     }
 
+
     public void removeProduct(Shop shop, long id) {
         shop.getProducts().removeIf(obj -> obj.getId() == id);
         System.out.println("Produsul a fost sters");
@@ -17,6 +18,9 @@ public class ShopService {
     public void addAction(Shop shop, Action action) {
         shop.getActions().add(action);
 
+    }
+    public void addActionDb(Action action) {
+        actionRepository.getInstance().addActionDB(action);
     }
 
     public void addOrder(Shop shop, Order order) {
