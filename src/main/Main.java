@@ -3,9 +3,10 @@ import repository.*;
 import model.*;
 import service.*;
 
+import java.io.IOException;
 import  java.util.*;
 public class Main {
-    public static void main(String args[]) {
+    public static void main(String args[]) throws IOException {
         Shop shop = new Shop();
         String input;
         Scanner scanner = new Scanner(System.in);

@@ -5,6 +5,11 @@ import service.ShopService;
 import service.*;
 import model.*;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.*;
+
 import java.util.*;
 
 public class Shop {
@@ -246,7 +251,7 @@ public class Shop {
         shopService.addOrder(getInstance(), added_order4);
         ordersRepository.getInstance().addordersDB(added_order4);
     }
-    public void menu_productsAndActions() {
+    public void menu_productsAndActions() throws IOException {
         do {
             System.out.println("Ikea Menu");
             System.out.println("1. Products");
@@ -344,6 +349,7 @@ public class Shop {
                                 shopService.addFurniture(getInstance(), added_furniture);
                                 productRepository.getInstance().addProductDB(added_furniture);
                                 furnitureRepository.getInstance().addfurnitureDB(added_furniture);
+                                Audit.logAction("addFurniture");
                                 break;
                             case "2":
                                 System.out.println("Name:");
@@ -390,6 +396,7 @@ public class Shop {
                                 shopService.addLighting(getInstance(), added_lighting);
                                 productRepository.getInstance().addProductDB(added_lighting);
                                 lightingRepository.getInstance().addlightingDB(added_lighting);
+                                Audit.logAction("addLighting");
                                 break;
                             case "3":
                                 System.out.println("Name:");
@@ -427,6 +434,7 @@ public class Shop {
                                 shopService.addSmartHome(getInstance(), added_smarthome);
                                 productRepository.getInstance().addProductDB(added_smarthome);
                                 smarthomeRepository.getInstance().addsmarthomeDB(added_smarthome);
+                                Audit.logAction("addSmartHome");
                                 break;
                         }
                     }
@@ -443,18 +451,22 @@ public class Shop {
                                 case "1":
                                     //shopService.printProductsDetails(getInstance());
                                     productRepository.getInstance().printAllProductsDB();
+                                    Audit.logAction("ShowProducts");
                                     break;
                                 case "2":
                                     //shopService.printFurnituresDetails(getInstance());
                                     furnitureRepository.getInstance().printAllFurnitureDB();
+                                    Audit.logAction("ShowFurniture");
                                     break;
                                 case "3":
                                     //shopService.printLightingsDetails(getInstance());
                                     lightingRepository.getInstance().printAllLightingDB();
+                                    Audit.logAction("ShowLighting");
                                     break;
                                 case "4":
                                     //shopService.printSmartHomesDetails(getInstance());
                                     smarthomeRepository.getInstance().printAllSmartHomeDB();
+                                    Audit.logAction("ShowSmartHome");
                                     break;
                                 default:
                                     System.out.println("Invalid input. Please enter a valid option.");
@@ -496,6 +508,7 @@ public class Shop {
                                    // shopService.removeProduct(getInstance(), furnitureId);
                                     furnitureRepository.getInstance().deleteFurnitureByIdDB(furnitureId);
                                     productRepository.getInstance().deleteProductByIdDB(furnitureId);
+                                    Audit.logAction("DeleteFurniture");
                                     break;
                                 case "2":
                                     //shopService.printLightingsDetails(getInstance());
@@ -513,6 +526,7 @@ public class Shop {
 //                                    shopService.removeProduct(getInstance(), lightingId);
                                     productRepository.getInstance().deleteProductByIdDB(lightingId);
                                     lightingRepository.getInstance().deleteLightingByIdDB(lightingId);
+                                    Audit.logAction("DeleteLighting");
                                     break;
                                 case "3":
                                     //shopService.printSmartHomesDetails(getInstance());
@@ -535,6 +549,7 @@ public class Shop {
 
                                     smarthomeRepository.getInstance().deleteSmarthomeByIdDB(smarthomeId);
                                     productRepository.getInstance().deleteProductByIdDB(smarthomeId);
+                                    Audit.logAction("DeleteSmartHome");
                                     break;
                                 default:
                                     continue;
@@ -571,12 +586,14 @@ public class Shop {
 
                         //shopService.printProductsDetailsByRange(getInstance(), min, max);
                         productRepository.getInstance().printProductsDetailsByRangeDB(min,max);
+                        Audit.logAction("ShowByPriceRange");
 
                     }
 
                     if (input.equals("5")) {
                         //shopService.printProductsDetailsSorted(getInstance());
                         productRepository.getInstance().printProductsDetailsSortedDB();
+                        Audit.logAction("ShowProductsSorted");
                     }
                 } while (!input.equals("6"));
 
@@ -633,6 +650,7 @@ public class Shop {
                                 shopService.addAction(getInstance(), added_delivery);
                                 deliveryRepository.getInstance().addDeliveryDB(added_delivery);
                                 actionRepository.getInstance().addActionDB(added_delivery);
+                                Audit.logAction("AddDelivery");
                                 break;
                             case "2":
                                 System.out.println("Name:");
@@ -657,6 +675,7 @@ public class Shop {
                                 actionRepository.getInstance().addActionDB(added_measuring);
                                 measuringRepository.getInstance().addMeasuringDB(added_measuring);
                                 shopService.addMeasuring(getInstance(), added_measuring);
+                                Audit.logAction("AddMeasuring");
                                 break;
 
                             case "3":
@@ -701,6 +720,7 @@ public class Shop {
                                 shopService.addAssembly(getInstance(), added_assembly);
                                 actionRepository.getInstance().addActionDB(added_assembly);
                                 assemblyRepository.getInstance().addAssemblyDB(added_assembly);
+                                Audit.logAction("AddAssembly");
                                 break;
                         }
                     } else if (input2.equals("2")) {
@@ -714,18 +734,23 @@ public class Shop {
                             case "1":
                                 //shopService.printActionsDetails(getInstance());
                                 actionRepository.getInstance().printAllActionsDB();
+                                Audit.logAction("ShowActions");
                                 break;
                             case "2":
                                 //shopService.printDeliveryDetails(getInstance());
                                 deliveryRepository.getInstance().printAllDeliveriesDB();
+                                Audit.logAction("ShowDeliveries");
                                 break;
                             case "3":
                                 //shopService.printMeasuringDetails(getInstance());
                                 measuringRepository.getInstance().printAllMeasuringDB();
+
+                                Audit.logAction("ShowMeasurings");
                                 break;
                             case "4":
                                 //shopService.printAssemblyDetails(getInstance());
                                 assemblyRepository.getInstance().printAllAssembliesDB();
+                                Audit.logAction("ShowAssemblies");
                                 break;
                         }
 
@@ -760,6 +785,7 @@ public class Shop {
 //                                    shopService.removeAction(getInstance(), deliveryId);
                                     deliveryRepository.getInstance().deleteDeliveryByIdDB(deliveryId);
                                     actionRepository.getInstance().deleteActionByIdDB(deliveryId);
+                                    Audit.logAction("DeleteDelivery");
                                     break;
                                 case "2":
                                     //shopService.printMeasuringDetails(getInstance());
@@ -774,6 +800,7 @@ public class Shop {
 //                                    shopService.removeAction(getInstance(), measuringId);
                                     measuringRepository.getInstance().deleteMeasuringByIdDB(measuringId);
                                     actionRepository.getInstance().deleteActionByIdDB(measuringId);
+                                    Audit.logAction("DeleteMeasuring");
                                     break;
                                 case "3":
 //                                    shopService.printAssemblyDetails(getInstance());
@@ -790,6 +817,7 @@ public class Shop {
 //                                    shopService.removeAction(getInstance(), assemblyId);
                                     assemblyRepository.getInstance().deleteAssemblyByIdDB(assemblyId);
                                     actionRepository.getInstance().deleteActionByIdDB(assemblyId);
+                                    Audit.logAction("DeleteAssembly");
                                     break;
                                 default:
                                     break;
@@ -802,7 +830,7 @@ public class Shop {
         } while (!menutype.equals("3"));
 
     }
-    public void menu_orders() {
+    public void menu_orders() throws IOException {
         String input_orders;
         do {
             System.out.println("Ikea Menu");
@@ -949,9 +977,11 @@ public class Shop {
 
                     Order added_order = orderService.buildOrder(actionRepository.getInstance().getActionById(action_id), productRepository.getInstance().getProductById(product_id));
                     ordersRepository.getInstance().addordersDB(added_order);
+                    Audit.logAction("AddOrder");
                 }
             } else if (input_orders.equals("2")) {
                 ordersRepository.getInstance().printAllOrdersDB();
+                Audit.logAction("ShowOrders");
             } else if (input_orders.equals("3")) {
                 ordersRepository.getInstance().printAllOrdersDB();
 
@@ -964,6 +994,7 @@ public class Shop {
                         continue;
                     }
                     ordersRepository.getInstance().deleteOrderByIdDB(orderId);
+                    Audit.logAction("DeleteOrder");
                     break;
                 }
             }
