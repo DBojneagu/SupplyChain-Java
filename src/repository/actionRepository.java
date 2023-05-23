@@ -103,7 +103,7 @@ public class actionRepository {
 
             if (resultSet.next()) {
                 int count = resultSet.getInt(1);
-                return count > 0; // Return true if the action ID exists in the specified action type table
+                return count > 0;
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -130,14 +130,14 @@ public class actionRepository {
             if (resultSet.next()) {
                 int count = resultSet.getInt(1);
                 if (count > 0) {
-                    // Check if the action ID exists in the orders table
+
                     PreparedStatement ordersStatement = connection.prepareStatement(ordersSql);
                     ordersStatement.setLong(1, id);
                     ResultSet ordersResultSet = ordersStatement.executeQuery();
 
                     if (ordersResultSet.next()) {
                         int ordersCount = ordersResultSet.getInt(1);
-                        return ordersCount == 0; // Return true if the action ID is not in the orders table
+                        return ordersCount == 0;
                     }
 
                     ordersResultSet.close();
@@ -163,12 +163,12 @@ public class actionRepository {
             ResultSet resultSet = statement.executeQuery();
 
             if (resultSet.next()) {
-                // Retrieve the action details from the result set
+
                 long actionId = resultSet.getLong("id");
                 String name = resultSet.getString("name");
                 double price = resultSet.getDouble("price");
 
-                // Create an instance of the Action object with the retrieved details
+
                 Action action = new Action(actionId, name, price);
 
                 return action;
@@ -177,7 +177,7 @@ public class actionRepository {
             e.printStackTrace();
         }
 
-        return null; // Return null if no action with the given ID is found
+        return null;
     }
 
 

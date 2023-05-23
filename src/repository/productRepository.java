@@ -75,7 +75,7 @@ public class productRepository {
 
             if (resultSet.next()) {
                 int count = resultSet.getInt(1);
-                return count > 0; // Return true if the product ID exists in the specified product type table
+                return count > 0;
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -96,13 +96,13 @@ public class productRepository {
             ResultSet resultSet = statement.executeQuery();
 
             if (resultSet.next()) {
-                // Retrieve the product details from the result set
+
                 long productId = resultSet.getLong("id");
                 String name = resultSet.getString("name");
                 int price = resultSet.getInt("price");
                 int stock = resultSet.getInt("stock");
 
-                // Create an instance of the Product object with the retrieved details
+
                 Product product = new Product(productId, name, price, stock);
 
                 return product;
@@ -111,7 +111,7 @@ public class productRepository {
             e.printStackTrace();
         }
 
-        return null; // Return null if no product with the given ID is found
+        return null;
     }
 
     public boolean isValidProductIdOrdersDB(long id, String productType) {
@@ -139,7 +139,7 @@ public class productRepository {
 
                     if (ordersResultSet.next()) {
                         int ordersCount = ordersResultSet.getInt(1);
-                        return ordersCount == 0; // Return true if the product ID is not in the orders table
+                        return ordersCount == 0;
                     }
 
                     ordersResultSet.close();
