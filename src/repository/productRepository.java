@@ -132,7 +132,7 @@ public class productRepository {
             if (resultSet.next()) {
                 int count = resultSet.getInt(1);
                 if (count > 0) {
-                    // Check if the product ID exists in the orders table
+
                     PreparedStatement ordersStatement = connection.prepareStatement(ordersSql);
                     ordersStatement.setLong(1, id);
                     ResultSet ordersResultSet = ordersStatement.executeQuery();
