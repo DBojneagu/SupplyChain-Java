@@ -10,7 +10,7 @@ public class DatabaseConnection {
 
     public static Connection getInstance() throws SQLException {
         if (connection == null || connection.isClosed()) {
-            String url = "jdbc:mysql://localhost:3310/david";
+            String url = "jdbc:mysql://localhost:3306/david";
             String username = "root";
             String password = "";
             try {
