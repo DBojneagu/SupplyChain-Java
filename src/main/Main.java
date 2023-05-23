@@ -13,7 +13,7 @@ public class Main {
         do {
            //deliveryRepository.getInstance().printAllDeliveries();
             System.out.println("Ikea Menu");
-            System.out.println("1. Products Menu & Delivery Menu");
+            System.out.println("1. Products Menu & Actions Menu");
             System.out.println("2. Orders Menu");
             System.out.println("3. Initialize the database");
             System.out.println("4. Delete the DataBase ");
@@ -33,6 +33,7 @@ public class Main {
                 shop.init();
             }
         else if (input.equals("4")) {
+                ordersRepository.getInstance().deleteAllorderssDB();
                 actionRepository.getInstance().deleteAllActionsDB();
                 deliveryRepository.getInstance().deleteAllDeliveriesDB();
                 productRepository.getInstance().deleteAllProdcutsDB();

@@ -501,7 +501,7 @@ public class Shop {
                                     //                                        continue;
                                     //                                    }
                                     if (!productRepository.getInstance().isValidProductIdOrdersDB(furnitureId, "1")) {
-                                        System.out.println("Invalid ID entered. Please try again.");
+                                        System.out.println("Invalid ID entered or this Product is currently in an order.");
                                         continue;
                                     }
 
@@ -519,7 +519,7 @@ public class Shop {
                                     scanner.nextLine();
 
                                     if (!productRepository.getInstance().isValidProductIdOrdersDB(lightingId, "2")) {
-                                        System.out.println("Invalid ID entered. Please try again.");
+                                        System.out.println("Invalid ID entered or this Product is currently in an order.");
                                         continue;
                                     }
 
@@ -541,7 +541,7 @@ public class Shop {
                                     //                                        continue;
                                     //                                    }
                                     if (!productRepository.getInstance().isValidProductIdOrdersDB(smarthomeId, "3")) {
-                                        System.out.println("Invalid ID entered. Please try again.");
+                                        System.out.println("Invalid ID entered or this Product is currently in an order.");
                                         continue;
                                     }
 
@@ -622,7 +622,7 @@ public class Shop {
                                     //                                        continue;
                                     //                                    }
                                     if (!productRepository.getInstance().isValidProductIdOrdersDB(furnitureId, "1")) {
-                                        System.out.println("Invalid ID entered. Please try again.");
+                                        System.out.println("Invalid ID entered or this Product is currently in an order.");
                                         continue;
                                     }
 
@@ -691,7 +691,7 @@ public class Shop {
                                     scanner.nextLine();
 
                                     if (!productRepository.getInstance().isValidProductIdOrdersDB(lightingId, "2")) {
-                                        System.out.println("Invalid ID entered. Please try again.");
+                                        System.out.println("Invalid ID entered or this Product is currently in an order.");
                                         continue;
                                     }
 
@@ -752,7 +752,7 @@ public class Shop {
                                     //                                        continue;
                                     //                                    }
                                     if (!productRepository.getInstance().isValidProductIdOrdersDB(smarthomeId, "3")) {
-                                        System.out.println("Invalid ID entered. Please try again.");
+                                        System.out.println("Invalid ID entered or this Product is currently in an order.");
                                         continue;
                                     }
 
@@ -981,7 +981,7 @@ public class Shop {
                                     //                                        continue;
                                     //                                    }
                                     if (!actionRepository.getInstance().isValidActionIdOrdersDB(deliveryId, "1")) {
-                                        System.out.println("Invalid ID entered. Please try again.");
+                                        System.out.println("Invalid ID entered or this Action is currently in an order.");
                                         continue;
                                     }
                                     scanner.nextLine();
@@ -996,7 +996,7 @@ public class Shop {
                                     System.out.print("Enter the ID of the measuring you want to remove: ");
                                     long measuringId = scanner.nextLong();
                                     if (!actionRepository.getInstance().isValidActionIdOrdersDB(measuringId, "2")) {
-                                        System.out.println("Invalid ID entered. Please try again.");
+                                        System.out.println("Invalid ID entered or this Action is currently in an order.");
                                         continue;
                                     }
                                     scanner.nextLine();
@@ -1013,7 +1013,7 @@ public class Shop {
                                     long assemblyId = scanner.nextLong();
 
                                     if (!actionRepository.getInstance().isValidActionIdOrdersDB(assemblyId, "3")) {
-                                        System.out.println("Invalid ID entered. Please try again.");
+                                        System.out.println("Invalid ID entered or this Action is currently in an order.");
                                         continue;
                                     }
                                     scanner.nextLine();
@@ -1050,7 +1050,7 @@ public class Shop {
                                     //                                        continue;
                                     //                                    }
                                     if (!actionRepository.getInstance().isValidActionIdOrdersDB(deliveryId, "1")) {
-                                        System.out.println("Invalid ID entered. Please try again.");
+                                        System.out.println("Invalid ID entered or this Action is currently in an order.");
                                         continue;
                                     }
                                     scanner.nextLine();
@@ -1086,7 +1086,7 @@ public class Shop {
                                     System.out.print("Enter the ID of the measuring you want to remove: ");
                                     long measuringId = scanner.nextLong();
                                     if (!actionRepository.getInstance().isValidActionIdOrdersDB(measuringId, "2")) {
-                                        System.out.println("Invalid ID entered. Please try again.");
+                                        System.out.println("Invalid ID entered or this Action is currently in an order.");
                                         continue;
                                     }
                                     scanner.nextLine();
@@ -1119,7 +1119,7 @@ public class Shop {
                                     long assemblyId = scanner.nextLong();
 
                                     if (!actionRepository.getInstance().isValidActionIdOrdersDB(assemblyId, "3")) {
-                                        System.out.println("Invalid ID entered. Please try again.");
+                                        System.out.println("Invalid ID entered or this Action is currently in an order.");
                                         continue;
                                     }
                                     scanner.nextLine();
